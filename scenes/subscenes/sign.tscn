@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://6rrfuyskmfis"]
+
+[ext_resource type="Texture2D" uid="uid://dkptde3qb2kht" path="res://assets/sign.png" id="1_325y1"]
+[ext_resource type="Script" path="res://scenes/subscenes/sign.gd" id="1_k1421"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnpt"]
+size = Vector2(89, 127)
+
+[node name="sign" type="Area2D"]
+script = ExtResource("1_k1421")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_325y1")
+
+[node name="PanelSign" type="Panel" parent="Sprite2D"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.75
+offset_top = -41.75
+offset_right = 7.25
+offset_bottom = -11.75
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="Sprite2D/PanelSign"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_hfnpt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
