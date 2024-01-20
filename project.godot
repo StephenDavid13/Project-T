@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project T"
-run/main_scene="res://scenes/main_scenes/main_scene_start.tscn"
+run/main_scene="res://scenes/main_scenes/level_dungeon.tscn"
 config/features=PackedStringArray("4.0", "Mobile")
 config/icon="res://icon.svg"
 
