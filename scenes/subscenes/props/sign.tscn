@@ -1,7 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://6rrfuyskmfis"]
+[gd_scene load_steps=5 format=3 uid="uid://6rrfuyskmfis"]
 
 [ext_resource type="Texture2D" uid="uid://dkptde3qb2kht" path="res://assets/sign.png" id="1_325y1"]
 [ext_resource type="Script" path="res://scenes/subscenes/props/sign.gd" id="1_k1421"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7jb3"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfnpt"]
 size = Vector2(89, 127)
@@ -14,17 +21,18 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_325y1")
 
 [node name="PanelSign" type="Panel" parent="Sprite2D"]
-visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -26.75
-offset_top = -41.75
-offset_right = 7.25
-offset_bottom = -11.75
+offset_left = -21.0
+offset_top = -40.0
+offset_right = -1.0
+offset_bottom = -20.0
 grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p7jb3")
 
 [node name="Label" type="Label" parent="Sprite2D/PanelSign"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var panel = $AnimatedSprite2D/Panel
+@onready var panel = $AnimatedSprite2D/PanelSign
 
 func _on_body_entered(body):
 	if body.name == "main_char":
