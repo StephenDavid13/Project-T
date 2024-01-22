@@ -6,12 +6,20 @@ extends Node
 @onready var enemy_spawn_2 = $"../enemies/enemy_spawn_2"
 @onready var enemy_spawn_3 = $"../enemies/enemy_spawn_3"
 @onready var enemy_spawn_4 = $"../enemies/enemy_spawn_4"
+@onready var enemyBattleSequence = $BattleSequenceComponent
+
+var skeleton = preload("res://scenes/subscenes/enemies/enemy_skeleton.tscn")
+var goblin = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn")
 
 var battle_start = false
 var initial_battle_check = true
-var skeleton = preload("res://scenes/subscenes/enemies/enemy_skeleton.tscn")
-var goblin = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn")
 var rng_generator = RandomNumberGenerator.new()
+
+var spawn_number_rng = 0
+var mob1 : Node2D
+var mob2 : Node2D
+var mob3 : Node2D
+var mob4 : Node2D
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -50,16 +58,12 @@ func randomiseMonsterSpawn(mob, spawn_position):
 	add_child(mob)
 	
 func spawnMonster():
-	var spawn_number_rng = rng_generator.randi_range(1, 4)
+	spawn_number_rng = rng_generator.randi_range(1, 4)
 	if spawn_number_rng >= 1:
-		var mob1 : Node2D
 		randomiseMonsterSpawn(mob1, enemy_spawn_1.position)
 	if spawn_number_rng >= 2:
-		var mob2 : Node2D
 		randomiseMonsterSpawn(mob2, enemy_spawn_2.position)
 	if spawn_number_rng >= 3:
-		var mob3 : Node2D
 		randomiseMonsterSpawn(mob3, enemy_spawn_3.position)
 	if spawn_number_rng >= 4:
-		var mob4 : Node2D
 		randomiseMonsterSpawn(mob4, enemy_spawn_4.position)
