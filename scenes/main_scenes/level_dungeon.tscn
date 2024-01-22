@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mi2hvyofm0nv"]
+[gd_scene load_steps=12 format=3 uid="uid://mi2hvyofm0nv"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_1we34"]
 [ext_resource type="Script" path="res://scenes/main_scenes/scripts/battle_game_manager.gd" id="2_26x1q"]
@@ -1267,20 +1267,6 @@ texture = ExtResource("2_mio3r")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0712o")
 
-[sub_resource type="GDScript" id="GDScript_j8ndu"]
-script/source = "extends Camera2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [node name="Node2D" type="Node2D"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -1340,7 +1326,6 @@ position = Vector2(233, 895)
 [node name="Camera2D" type="Camera2D" parent="main_char"]
 offset = Vector2(2.08165e-12, -100)
 zoom = Vector2(1.5, 1.5)
-script = SubResource("GDScript_j8ndu")
 
 [node name="enemies" type="Node" parent="."]
 

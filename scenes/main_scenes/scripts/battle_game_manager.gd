@@ -13,7 +13,6 @@ var skeleton = preload("res://scenes/subscenes/enemies/enemy_skeleton.tscn")
 var goblin = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn")
 var rng_generator = RandomNumberGenerator.new()
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if battle_start and initial_battle_check:
@@ -52,16 +51,15 @@ func randomiseMonsterSpawn(mob, spawn_position):
 	
 func spawnMonster():
 	var spawn_number_rng = rng_generator.randi_range(1, 4)
-	print(spawn_number_rng)
 	if spawn_number_rng >= 1:
-		var mob1
+		var mob1 : Node2D
 		randomiseMonsterSpawn(mob1, enemy_spawn_1.position)
 	if spawn_number_rng >= 2:
-		var mob2
+		var mob2 : Node2D
 		randomiseMonsterSpawn(mob2, enemy_spawn_2.position)
 	if spawn_number_rng >= 3:
-		var mob3
+		var mob3 : Node2D
 		randomiseMonsterSpawn(mob3, enemy_spawn_3.position)
 	if spawn_number_rng >= 4:
-		var mob4
+		var mob4 : Node2D
 		randomiseMonsterSpawn(mob4, enemy_spawn_4.position)
