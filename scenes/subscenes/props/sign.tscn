@@ -21,6 +21,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("1_325y1")
 
 [node name="PanelSign" type="Panel" parent="Sprite2D"]
+visible = false
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5

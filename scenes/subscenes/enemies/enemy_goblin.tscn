@@ -1,8 +1,41 @@
-[gd_scene load_steps=10 format=3 uid="uid://m1k3my7wbfs0"]
+[gd_scene load_steps=19 format=3 uid="uid://m1k3my7wbfs0"]
 
 [ext_resource type="Texture2D" uid="uid://s7drlxykal3a" path="res://assets/enemies/Goblin/Idle.png" id="1_0vfxc"]
+[ext_resource type="Texture2D" uid="uid://4s0joyypdouc" path="res://assets/enemies/Goblin/Attack.png" id="1_vu58a"]
 [ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="2_dywre"]
 [ext_resource type="PackedScene" uid="uid://c66n3hfe77xab" path="res://scripts/enemy_battle_sequence_component.tscn" id="3_a4opc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dyetp"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ahjt"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_joqh5"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fldqu"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h6g0h"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(600, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pmpxw"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(750, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odsqk"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(900, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fhw6"]
+atlas = ExtResource("1_vu58a")
+region = Rect2(1050, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4qjm"]
 atlas = ExtResource("1_0vfxc")
@@ -22,6 +55,35 @@ region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b0c77"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dyetp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ahjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_joqh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fldqu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h6g0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pmpxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odsqk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fhw6")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 10.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s4qjm")
@@ -51,8 +113,10 @@ texture_filter = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_b0c77")
+animation = &"attack"
 autoplay = "default"
-frame_progress = 0.947138
+frame = 7
+frame_progress = 1.0
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
@@ -69,3 +133,5 @@ EXPERIENCE = 10
 
 [node name="EnemyBattleSequenceComponent" parent="." node_paths=PackedStringArray("statsComponent") instance=ExtResource("3_a4opc")]
 statsComponent = NodePath("../StatsComponent")
+
+[connection signal="animation_finished" from="RigidBody2D/AnimatedSprite2D" to="EnemyBattleSequenceComponent" method="_on_animated_sprite_2d_animation_finished"]

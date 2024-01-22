@@ -47,6 +47,7 @@ func finishingBattle():
 	main_char.can_move = true;
 	camera_2d.position_smoothing_enabled = false
 
+# Randomise moonster spawn and instantiate them
 func randomiseMonsterSpawn(mob, spawn_position):
 	var type_rng = rng_generator.randi_range(0, 1)
 	match type_rng:
@@ -57,6 +58,7 @@ func randomiseMonsterSpawn(mob, spawn_position):
 	mob.position = spawn_position
 	add_child(mob)
 	
+# Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
 func spawnMonster():
 	spawn_number_rng = rng_generator.randi_range(1, 4)
 	if spawn_number_rng >= 1:
