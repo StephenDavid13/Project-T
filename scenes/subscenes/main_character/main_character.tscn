@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scenes/subscenes/main_character/main_character.gd" id="1_tu3bq"]
 [ext_resource type="Texture2D" uid="uid://c0pxwkqhle35j" path="res://assets/character/char_blue.png" id="2_thmrf"]
-[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_syxs6"]
+[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scenes/main_scenes/scripts/stats_component.tscn" id="3_6xc1c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rsjeh"]
 atlas = ExtResource("2_thmrf")
@@ -135,4 +135,5 @@ frame_progress = 0.228693
 position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_5dmqn")
 
-[node name="StatsComponent" parent="." instance=ExtResource("3_syxs6")]
+[node name="StatsComponent" parent="." instance=ExtResource("3_6xc1c")]
+STRENGTH = 10

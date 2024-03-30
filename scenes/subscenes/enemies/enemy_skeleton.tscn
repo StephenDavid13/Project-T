@@ -1,9 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://4oheacd0k85c"]
+[gd_scene load_steps=18 format=3 uid="uid://4oheacd0k85c"]
 
 [ext_resource type="Texture2D" uid="uid://cy8nlikvufggk" path="res://assets/enemies/Skeleton/Attack.png" id="1_6gng3"]
 [ext_resource type="Texture2D" uid="uid://ldrroy55w3fx" path="res://assets/enemies/Skeleton/Walk.png" id="1_8177g"]
-[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="2_xeol2"]
-[ext_resource type="PackedScene" uid="uid://c66n3hfe77xab" path="res://scripts/enemy_battle_sequence_component.tscn" id="3_dh8d3"]
+[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scenes/main_scenes/scripts/stats_component.tscn" id="3_mva7g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsop6"]
 atlas = ExtResource("1_6gng3")
@@ -121,14 +120,10 @@ flip_h = true
 position = Vector2(-18.5, 2)
 shape = SubResource("RectangleShape2D_cnbqv")
 
-[node name="StatsComponent" parent="." instance=ExtResource("2_xeol2")]
+[node name="StatsComponent" parent="." instance=ExtResource("3_mva7g")]
 NAME = "Skeleton"
 VITALITY = 10
-STRENGTH = 6
-INTELLIGENCE = 10
+STRENGTH = 7
+INTELLIGENCE = 0
+SPEED = 10
 EXPERIENCE = 10
-
-[node name="EnemyBattleSequenceComponent" parent="." node_paths=PackedStringArray("statsComponent") instance=ExtResource("3_dh8d3")]
-statsComponent = NodePath("../StatsComponent")
-
-[connection signal="animation_finished" from="RigidBody2D/AnimatedSprite2D" to="EnemyBattleSequenceComponent" method="_on_animated_sprite_2d_animation_finished"]
