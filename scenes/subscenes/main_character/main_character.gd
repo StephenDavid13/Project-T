@@ -5,11 +5,9 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-var can_move = true;
+var can_move = true
+var can_battle = false
 
-#Place character stats
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _physics_process(delta):
@@ -19,12 +17,9 @@ func _physics_process(delta):
 		else:
 			main_char.animation = "default"
 			
-		# Add the gravity.
 		if not is_on_floor():
 			velocity.y += gravity * delta
 
-		# Get the input direction and handle the movement/deceleration.
-		# As good practice, you should replace UI actions with custom gameplay actions.
 		var direction = Input.get_axis("left", "right")
 		if direction:
 			velocity.x = direction * SPEED
@@ -35,6 +30,20 @@ func _physics_process(delta):
 		
 		var isLeft = velocity.x < 0
 		main_char.flip_h = isLeft
+	elif can_battle : 
+		main_char.animation = "default"
 	else:
 		velocity.x = 0
 		main_char.animation = "default"
+
+func turn_start():
+	$ActionPanel.is_player_turn = true
+	$ActionPanel.update_button_state()
+
+func _on_turn_end():
+	# Signal TurnManager to switch to enemy turn
+	can_battle = false
+	await $"../TurnManager".start_next_turn()
+	
+func _on_attack():
+	main_char.play("attack")

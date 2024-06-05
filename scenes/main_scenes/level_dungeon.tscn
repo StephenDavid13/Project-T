@@ -1,13 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://mi2hvyofm0nv"]
+[gd_scene load_steps=14 format=3 uid="uid://mi2hvyofm0nv"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_1we34"]
-[ext_resource type="Script" path="res://scenes/main_scenes/scripts/battle_game_manager.gd" id="2_26x1q"]
+[ext_resource type="Script" path="res://scripts/battle_game_manager.gd" id="2_26x1q"]
 [ext_resource type="Texture2D" uid="uid://bcm35cf1kmbxc" path="res://assets/tilemap/oak_woods_tileset.png" id="2_mio3r"]
 [ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="4_etna4"]
-[ext_resource type="Script" path="res://scenes/main_scenes/scripts/GoToNextLevel.gd" id="5_0okrd"]
-[ext_resource type="Script" path="res://scenes/main_scenes/scripts/GoOutside.gd" id="5_2fh51"]
-[ext_resource type="Script" path="res://scenes/main_scenes/scripts/game_manager.gd" id="5_qjp1p"]
-[ext_resource type="Script" path="res://scenes/main_scenes/scripts/EnterBattle.gd" id="7_0sewb"]
+[ext_resource type="Script" path="res://scripts/GoToNextLevel.gd" id="5_0okrd"]
+[ext_resource type="Script" path="res://scripts/GoOutside.gd" id="5_2fh51"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_qjp1p"]
+[ext_resource type="Script" path="res://scripts/EnterBattle.gd" id="7_0sewb"]
+[ext_resource type="Script" path="res://scripts/playerSelection.gd" id="9_ey33n"]
+[ext_resource type="Script" path="res://scripts/TurnManager.gd" id="9_uqhtx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sac8h"]
 size = Vector2(140, 251)
@@ -1268,6 +1270,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0712o")
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("2_26x1q")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -1288,9 +1291,6 @@ metadata/_edit_lock_ = true
 [node name="game_manager" type="Node" parent="."]
 script = ExtResource("5_qjp1p")
 
-[node name="battle_game_manager" type="Node" parent="."]
-script = ExtResource("2_26x1q")
-
 [node name="scene_changers" type="Node" parent="."]
 
 [node name="GoOutside" type="Area2D" parent="scene_changers"]
@@ -1301,7 +1301,7 @@ script = ExtResource("5_2fh51")
 shape = SubResource("RectangleShape2D_sac8h")
 
 [node name="EnterBattle" type="Area2D" parent="scene_changers"]
-position = Vector2(650, 850)
+position = Vector2(600, 850)
 script = ExtResource("7_0sewb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="scene_changers/EnterBattle"]
@@ -1323,23 +1323,63 @@ layer_0/tile_data = PackedInt32Array(983040, 524288, 0, 983041, 589824, 0, 98304
 [node name="main_char" parent="." instance=ExtResource("4_etna4")]
 position = Vector2(233, 895)
 
+[node name="ActionPanel" type="Control" parent="main_char"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 66.0
+offset_top = -106.0
+offset_right = 199.0
+offset_bottom = 35.0
+script = ExtResource("9_ey33n")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="main_char/ActionPanel"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 150.0
+metadata/_edit_lock_ = true
+
+[node name="attackBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Attack"
+icon_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="defendBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Defend"
+metadata/_edit_lock_ = true
+
+[node name="healBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Heal"
+metadata/_edit_lock_ = true
+
 [node name="Camera2D" type="Camera2D" parent="main_char"]
+visible = false
 offset = Vector2(2.08165e-12, -100)
 zoom = Vector2(1.5, 1.5)
 
-[node name="enemies" type="Node" parent="."]
+[node name="enemies_spawn" type="Node" parent="."]
 
-[node name="enemy_spawn_1" type="Marker2D" parent="enemies"]
+[node name="enemy_spawn_1" type="Marker2D" parent="enemies_spawn"]
 position = Vector2(1000, 845)
 
-[node name="enemy_spawn_2" type="Marker2D" parent="enemies"]
+[node name="enemy_spawn_2" type="Marker2D" parent="enemies_spawn"]
 position = Vector2(1150, 845)
 
-[node name="enemy_spawn_3" type="Marker2D" parent="enemies"]
+[node name="enemy_spawn_3" type="Marker2D" parent="enemies_spawn"]
 position = Vector2(1300, 845)
 
-[node name="enemy_spawn_4" type="Marker2D" parent="enemies"]
+[node name="enemy_spawn_4" type="Marker2D" parent="enemies_spawn"]
 position = Vector2(1450, 845)
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("9_uqhtx")
 
 [connection signal="body_entered" from="scene_changers/GoOutside" to="scene_changers/GoOutside" method="_on_body_entered"]
 [connection signal="body_entered" from="scene_changers/EnterBattle" to="scene_changers/EnterBattle" method="_on_body_entered"]

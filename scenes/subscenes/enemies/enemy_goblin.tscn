@@ -1,9 +1,9 @@
 [gd_scene load_steps=19 format=3 uid="uid://m1k3my7wbfs0"]
 
+[ext_resource type="Script" path="res://scripts/Enemies.gd" id="1_0o4qd"]
 [ext_resource type="Texture2D" uid="uid://s7drlxykal3a" path="res://assets/enemies/Goblin/Idle.png" id="1_0vfxc"]
 [ext_resource type="Texture2D" uid="uid://4s0joyypdouc" path="res://assets/enemies/Goblin/Attack.png" id="1_vu58a"]
-[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="2_dywre"]
-[ext_resource type="PackedScene" uid="uid://c66n3hfe77xab" path="res://scripts/enemy_battle_sequence_component.tscn" id="3_a4opc"]
+[ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_ehitu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyetp"]
 atlas = ExtResource("1_vu58a")
@@ -106,6 +106,7 @@ animations = [{
 size = Vector2(128.5, 144)
 
 [node name="enemy_goblin" type="Node2D"]
+script = ExtResource("1_0o4qd")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 texture_filter = 1
@@ -123,15 +124,10 @@ flip_h = true
 position = Vector2(-0.25, 32)
 shape = SubResource("RectangleShape2D_cnbqv")
 
-[node name="StatsComponent" parent="." instance=ExtResource("2_dywre")]
+[node name="StatsComponent" parent="." instance=ExtResource("3_ehitu")]
 NAME = "Goblin"
 VITALITY = 15
-STRENGTH = 7
-INTELLIGENCE = 2
+STRENGTH = 4
+INTELLIGENCE = 0
 SPEED = 20
 EXPERIENCE = 10
-
-[node name="EnemyBattleSequenceComponent" parent="." node_paths=PackedStringArray("statsComponent") instance=ExtResource("3_a4opc")]
-statsComponent = NodePath("../StatsComponent")
-
-[connection signal="animation_finished" from="RigidBody2D/AnimatedSprite2D" to="EnemyBattleSequenceComponent" method="_on_animated_sprite_2d_animation_finished"]
