@@ -7,22 +7,20 @@ extends Node
 @onready var enemy_spawn_3 = $"enemies_spawn/enemy_spawn_3"
 @onready var enemy_spawn_4 = $"enemies_spawn/enemy_spawn_4"
 @onready var enemies = $enemies
+@onready var turnManager = $TurnManager
+
 var mob1 : Node2D
 var mob2 : Node2D
 var mob3 : Node2D
 var mob4 : Node2D
 
-var battle_start = false
+var battling = false
 var rng_generator = RandomNumberGenerator.new()
 
 func _ready():
 	# Focus on the very first button so it does not need mouse click
-	$main_char/playerSelection/VBoxContainer/attackBtn.grab_focus()
+	$main_char/ActionPanel.update_button_state()
 
-func _input(event):
-	if Input.is_action_just_pressed("action_use"):
-		finishingBattle()
-	# Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 # Called when battle is initiated. Only done once per level. Disallow player
 # movement and change camera view
@@ -32,14 +30,15 @@ func enteringBattle():
 	camera_2d.position_smoothing_speed = 2
 	camera_2d.move_local_x(575, true)
 	spawnMonster()
-	print(main_char.get_node("StatsComponent").SPEED)
-	print(get_children(true))
+	turnManager.start_battle()
+	battling = true
+	
 
 # Called when battle is finished. Allow player to move again
 func finishingBattle():
 	camera_2d.move_local_x(-575, true)
 	await get_tree().create_timer(2.5).timeout
-	battle_start = true
+	battling = false
 	main_char.can_move = true;
 	camera_2d.position_smoothing_enabled = false
 
@@ -64,4 +63,4 @@ func randomiseMonsterSpawn(mob, spawn_position):
 		1:
 			mob = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn").instantiate()
 	mob.position = spawn_position
-	enemies.add_child(mob)
+	enemies.call_deferred("add_child", mob)
