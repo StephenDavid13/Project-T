@@ -10,6 +10,7 @@ func _ready():
 	$VBoxContainer/healBtn.pressed.connect(self._on_heal_button_pressed)
 
 func _on_attack_button_pressed():
+	print("Attack action selected")
 	is_player_turn = false
 	character._on_attack()
 	update_button_state()

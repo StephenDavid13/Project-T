@@ -6,9 +6,19 @@ const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
 var can_move = true
-var can_battle = false
+var did_attack = false
+
+var max_health :int
+var current_health : int
+var health_bar: Control
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+
+func _ready():
+	max_health = $StatsComponent.VITALITY
+	current_health = $StatsComponent.VITALITY
+	health_bar = $HealthBar
+	update_health_bar()
 
 func _physics_process(delta):
 	if can_move :
@@ -30,8 +40,9 @@ func _physics_process(delta):
 		
 		var isLeft = velocity.x < 0
 		main_char.flip_h = isLeft
-	elif can_battle : 
-		main_char.animation = "default"
+	elif did_attack :
+		print("ATTACKING")
+		main_char.play("attack")
 	else:
 		velocity.x = 0
 		main_char.animation = "default"
@@ -42,8 +53,20 @@ func turn_start():
 
 func _on_turn_end():
 	# Signal TurnManager to switch to enemy turn
-	can_battle = false
-	await $"../TurnManager".start_next_turn()
+	await get_tree().create_timer(0.55).timeout
+	did_attack = false
+	$"../TurnManager".start_next_turn()
+	
+func take_damage(damage: int):
+	current_health -= damage
+	if current_health < 0:
+		current_health = 0
+	update_health_bar()
+
+func update_health_bar():
+	health_bar.update_health(current_health, max_health)
+
 	
 func _on_attack():
-	main_char.play("attack")
+	did_attack = true
+	

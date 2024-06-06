@@ -18,7 +18,8 @@ func _ready():
 func start_battle():
 	if not startBattle:
 		startBattle = true
-		call_deferred("determine_turn_order")
+		await get_tree().create_timer(1.5).timeout
+		determine_turn_order()
 		call_deferred("start_next_turn")
 
 func determine_turn_order():

@@ -7,3 +7,6 @@ class_name StatsComponent
 @export var INTELLIGENCE := 15
 @export var SPEED := 50
 @export var EXPERIENCE := 0
+
+func get_health():
+	return VITALITY
