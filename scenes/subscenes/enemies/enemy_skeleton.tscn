@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=3 uid="uid://4oheacd0k85c"]
+[gd_scene load_steps=20 format=3 uid="uid://4oheacd0k85c"]
 
 [ext_resource type="Texture2D" uid="uid://cy8nlikvufggk" path="res://assets/enemies/Skeleton/Attack.png" id="1_6gng3"]
 [ext_resource type="Texture2D" uid="uid://ldrroy55w3fx" path="res://assets/enemies/Skeleton/Walk.png" id="1_8177g"]
+[ext_resource type="Script" path="res://scripts/Enemies.gd" id="1_i6w4i"]
 [ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_qospy"]
 [ext_resource type="PackedScene" uid="uid://cbigfu4dtndpr" path="res://scenes/subscenes/props/health_bar.tscn" id="4_a8ery"]
 
@@ -106,6 +107,7 @@ animations = [{
 size = Vector2(113, 204)
 
 [node name="enemy_skeleton" type="Node2D"]
+script = ExtResource("1_i6w4i")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 texture_filter = 1
@@ -134,3 +136,5 @@ offset_left = -81.0
 offset_top = -141.0
 offset_right = 56.0
 offset_bottom = -101.0
+
+[connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

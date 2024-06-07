@@ -9,6 +9,7 @@ var startBattle : bool = false
 var turn_queue = []
 var initial_turn_order = []
 var alive_characters = []
+var mobs = []
 
 func _ready():
 	# Initialize player and enemies
@@ -19,14 +20,19 @@ func start_battle():
 	if not startBattle:
 		startBattle = true
 		await get_tree().create_timer(1.5).timeout
+		mobs.append_array(enemies.get_children())
+		
+		# Connect the died signal for each mob
+		for mob in mobs:
+			if(mob.has_signal("on_dead")):
+				mob.on_dead.connect(_on_mob_died.bind(mob))
 		determine_turn_order()
 		call_deferred("start_next_turn")
 
 func determine_turn_order():
 	# Collect all characters (player and enemies) into a single array
 	var all_characters = [player]
-	all_characters.append_array(enemies.get_children())
-	print(enemies.get_children())
+	all_characters.append_array(mobs)
 
 	# Sort characters by speed in descending order
 	all_characters.sort_custom(compare_speed)
@@ -84,23 +90,49 @@ func character_died(character):
 	# Remove character from turn_queue if present
 	turn_queue.erase(character)
 	# Optionally, check if battle should end (all enemies or player dead)
+	if character != player:
+		mobs.erase(character)
 	if character == player:
 		print("Player has died. Battle over.")
 		startBattle = false
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
 		print("All enemies defeated. Battle won!")
 		startBattle = false
+		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
 		print("All characters are dead. Battle over.")
 		startBattle = false
 
 func start_player_turn():
 	current_turn = TurnState.PLAYER_TURN
-	print("Player's Turn")
 	# Enable player input or other turn-specific logic
 	player.turn_start()
 
 func start_enemy_turn(enemy):
 	current_turn = TurnState.ENEMY_TURN
-	# Execute the turn for the enemy
-	enemy.turn_start()
+	# Execute the turn for the enemy if it still exists
+	if enemy and alive_characters.has(enemy):
+		enemy.turn_start()
+	else:
+		# If the enemy does not exist, immediately start the next turn
+		start_next_turn()
+
+func char_take_damage(damage: int):
+	player.take_damage(damage)
+	
+func _on_mob_died(mob):
+	print("A mob has died:", mob)
+	character_died(mob)
+	
+func get_frontmost_mob():
+	var player_position = player.position
+	var closest_mob = null
+	var min_distance = INF
+
+	for mob in mobs:
+		var distance = abs(mob.position.x - player_position.x)
+		if distance < min_distance:
+			min_distance = distance
+			closest_mob = mob
+
+	return closest_mob

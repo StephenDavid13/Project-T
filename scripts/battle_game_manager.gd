@@ -9,6 +9,8 @@ extends Node
 @onready var enemy_spawn_4 = $"enemies_spawn/enemy_spawn_4"
 @onready var turnManager = $TurnManager
 
+@onready var player_current_health : int
+
 var mob1 : Node2D
 var mob2 : Node2D
 var mob3 : Node2D
@@ -63,3 +65,6 @@ func randomiseMonsterSpawn(mob, spawn_position):
 			mob = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn").instantiate()
 	mob.position = spawn_position
 	enemies.call_deferred("add_child", mob)
+	
+func set_player_health(current_health):
+	player_current_health = current_health

@@ -15,6 +15,10 @@ run/main_scene="res://scenes/main_scenes/level_dungeon.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GameState="*res://scripts/GameState.gd"
+
 [display]
 
 window/size/viewport_width=1920

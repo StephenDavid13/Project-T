@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var main_char = $AnimatedSprite2D
+@onready var statsheet = $StatsComponent
+@onready var health_bar = $HealthBar
 
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
@@ -10,14 +12,16 @@ var did_attack = false
 
 var max_health :int
 var current_health : int
-var health_bar: Control
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+var rng_generator = RandomNumberGenerator.new()
+
 func _ready():
-	max_health = $StatsComponent.VITALITY
-	current_health = $StatsComponent.VITALITY
-	health_bar = $HealthBar
+	set_max_health_gamestate()
+	max_health = statsheet.VITALITY
+	current_health = GameState.player_current_health
+	
 	update_health_bar()
 
 func _physics_process(delta):
@@ -41,7 +45,6 @@ func _physics_process(delta):
 		var isLeft = velocity.x < 0
 		main_char.flip_h = isLeft
 	elif did_attack :
-		print("ATTACKING")
 		main_char.play("attack")
 	else:
 		velocity.x = 0
@@ -59,6 +62,7 @@ func _on_turn_end():
 	
 func take_damage(damage: int):
 	current_health -= damage
+	GameState.player_current_health = current_health
 	if current_health < 0:
 		current_health = 0
 	update_health_bar()
@@ -66,7 +70,16 @@ func take_damage(damage: int):
 func update_health_bar():
 	health_bar.update_health(current_health, max_health)
 
+func set_max_health_gamestate():
+	GameState.player_max_health = max_health
+	
+	if GameState.player_current_health == 0:
+		GameState.player_current_health = statsheet.VITALITY
+		print(GameState.player_current_health)
 	
 func _on_attack():
 	did_attack = true
+	var damage = ceil((statsheet.STRENGTH * randi_range(0, (statsheet.STRENGTH/2))) + (statsheet.STRENGTH / 2))
+	print("Player attacked with ", damage)
+	$"../TurnManager".get_frontmost_mob().take_damage(damage)
 	
