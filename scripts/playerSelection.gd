@@ -17,14 +17,14 @@ func _on_attack_button_pressed():
 	
 	
 func _on_defend_button_pressed():
-	print("Defend action selected")
 	is_player_turn = false
+	character._on_defend()
 	update_button_state()
 	character._on_turn_end()
 	
 func _on_heal_button_pressed():
-	print("Heal action selected")
 	is_player_turn = false
+	character._on_heal()
 	update_button_state()
 	character._on_turn_end()
 	

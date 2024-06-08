@@ -22,6 +22,9 @@ func start_battle():
 		await get_tree().create_timer(1.5).timeout
 		mobs.append_array(enemies.get_children())
 		
+		if(player.has_signal("on_dead")):
+				player.on_dead.connect(_on_player_died.bind())
+		
 		# Connect the died signal for each mob
 		for mob in mobs:
 			if(mob.has_signal("on_dead")):
@@ -95,8 +98,10 @@ func character_died(character):
 	if character == player:
 		print("Player has died. Battle over.")
 		startBattle = false
+		GameState.reset_character()
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
 		print("All enemies defeated. Battle won!")
+		print("Total Experience: ", GameState.player_exp)
 		startBattle = false
 		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
@@ -121,8 +126,13 @@ func char_take_damage(damage: int):
 	player.take_damage(damage)
 	
 func _on_mob_died(mob):
-	print("A mob has died:", mob)
+	GameState.earn_experience(mob.get_node("StatsComponent").EXPERIENCE)
 	character_died(mob)
+	
+func _on_player_died():
+	print("Player died: ", player.get_node("StatsComponent").NAME)
+	character_died(player)
+	
 	
 func get_frontmost_mob():
 	var player_position = player.position

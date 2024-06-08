@@ -183,7 +183,6 @@ position = Vector2(-4, 0)
 shape = SubResource("RectangleShape2D_5dmqn")
 
 [node name="StatsComponent" parent="." instance=ExtResource("3_6xc1c")]
-VITALITY = 110
 
 [node name="HealthBar" parent="." instance=ExtResource("4_0v2dn")]
 offset_left = -68.0

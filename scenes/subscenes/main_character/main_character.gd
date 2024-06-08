@@ -9,19 +9,19 @@ const JUMP_VELOCITY = -400.0
 
 var can_move = true
 var did_attack = false
+var did_heal = false
+var did_defend = false
 
-var max_health :int
-var current_health : int
+var max_health : int
+var defend : int
 
+signal on_dead()
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var rng_generator = RandomNumberGenerator.new()
 
 func _ready():
 	set_max_health_gamestate()
-	max_health = statsheet.VITALITY
-	current_health = GameState.player_current_health
-	
 	update_health_bar()
 
 func _physics_process(delta):
@@ -61,25 +61,50 @@ func _on_turn_end():
 	$"../TurnManager".start_next_turn()
 	
 func take_damage(damage: int):
-	current_health -= damage
-	GameState.player_current_health = current_health
-	if current_health < 0:
-		current_health = 0
+	var final_damage = damage
+	if did_defend:
+		final_damage -= defend
+		if final_damage <= 0:
+			final_damage = 0
+		did_defend = false
+		defend = 0
+	GameState.player_current_health -= final_damage
+	print("Monster final damage with ", final_damage)
+	if GameState.player_current_health <= 0:
+		GameState.player_current_health = GameState.player_max_health
+		update_health_bar()
+		on_dead.emit()
 	update_health_bar()
 
 func update_health_bar():
-	health_bar.update_health(current_health, max_health)
+	health_bar.update_health(GameState.player_current_health, max_health)
 
 func set_max_health_gamestate():
+	max_health = statsheet.VITALITY
 	GameState.player_max_health = max_health
 	
 	if GameState.player_current_health == 0:
 		GameState.player_current_health = statsheet.VITALITY
-		print(GameState.player_current_health)
 	
 func _on_attack():
 	did_attack = true
 	var damage = ceil((statsheet.STRENGTH * randi_range(0, (statsheet.STRENGTH/2))) + (statsheet.STRENGTH / 2))
 	print("Player attacked with ", damage)
 	$"../TurnManager".get_frontmost_mob().take_damage(damage)
+
+func _on_defend():
+	did_defend = true
+	defend = floor((statsheet.STRENGTH + statsheet.VITALITY) * 0.125)
+	print("Player defended with ", defend)
+	
+func _on_heal():
+	did_heal = true
+	var heal = floor(statsheet.INTELLIGENCE * randf_range(0.9, 1.5))
+	var new_health = GameState.player_current_health + heal
+	if new_health >= GameState.player_max_health:
+		GameState.player_current_health = GameState.player_max_health
+	else:
+		GameState.player_current_health += heal
+	print("Player heal with ", heal)
+	update_health_bar()
 	
