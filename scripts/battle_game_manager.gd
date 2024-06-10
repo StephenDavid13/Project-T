@@ -9,14 +9,12 @@ extends Node
 @onready var enemy_spawn_4 = $"enemies_spawn/enemy_spawn_4"
 @onready var turnManager = $TurnManager
 
-@onready var player_current_health : int
+var rng_generator = RandomNumberGenerator.new()
 
 var mob1 : Node2D
 var mob2 : Node2D
 var mob3 : Node2D
 var mob4 : Node2D
-
-var rng_generator = RandomNumberGenerator.new()
 
 func _ready():
 	# Focus on the very first button so it does not need mouse click
@@ -25,13 +23,13 @@ func _ready():
 # Called when battle is initiated. Only done once per level. Disallow player
 # movement and change camera view
 func enteringBattle():
+	main_char.current_battle_state = main_char.DungeonState.BATTLING
 	main_char.can_move = false;
 	camera_2d.position_smoothing_enabled = true
 	camera_2d.position_smoothing_speed = 2
 	camera_2d.move_local_x(545, true)
 	spawnMonster()
 	turnManager.start_battle()
-	
 
 # Called when battle is finished. Allow player to move again
 func finishingBattle():
@@ -39,6 +37,8 @@ func finishingBattle():
 	await get_tree().create_timer(2.5).timeout
 	main_char.can_move = true;
 	camera_2d.position_smoothing_enabled = false
+	main_char.current_battle_state = main_char.DungeonState.POST_BATTLE
+	$main_char/ActionPanel.post_battle_selection()
 
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
 func spawnMonster():
@@ -65,6 +65,3 @@ func randomiseMonsterSpawn(mob, spawn_position):
 			mob = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn").instantiate()
 	mob.position = spawn_position
 	enemies.call_deferred("add_child", mob)
-	
-func set_player_health(current_health):
-	player_current_health = current_health

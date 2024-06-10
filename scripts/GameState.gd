@@ -2,18 +2,22 @@ extends Node
 
 @onready var player = $main_char
 
-# Define your stats here
+# Game State variables
 var player_max_health : int
 var player_current_health : int
 var player_exp : int
+var tower_level : int
 
-# Other game state data can be added here
+var on_tower = false
 
-# Method to reset player health  
+# Method to reset player world
 func reset_character():
+	on_tower = false
+	tower_level = 1
 	player_exp = 0
 	player_current_health = player_max_health
 	get_tree().change_scene_to_file("res://scenes/main_scenes/outside_tower.tscn")
 	
+# Earning experience
 func earn_experience(experience : int):
 	player_exp += experience

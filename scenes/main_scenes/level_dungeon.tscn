@@ -1329,30 +1329,42 @@ offset_right = 221.0
 offset_bottom = 40.0
 script = ExtResource("9_ey33n")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="main_char/ActionPanel"]
+[node name="Battling_actions" type="VBoxContainer" parent="main_char/ActionPanel"]
 layout_mode = 0
 offset_right = 150.0
-offset_bottom = 150.0
-metadata/_edit_lock_ = true
+offset_bottom = 171.0
 
-[node name="attackBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+[node name="attackBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Attack"
 icon_alignment = 1
-metadata/_edit_lock_ = true
 
-[node name="defendBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+[node name="defendBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Defend"
-metadata/_edit_lock_ = true
 
-[node name="healBtn" type="Button" parent="main_char/ActionPanel/VBoxContainer"]
+[node name="healBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
 text = "Heal"
-metadata/_edit_lock_ = true
+
+[node name="PostBattling_actions" type="VBoxContainer" parent="main_char/ActionPanel"]
+visible = false
+layout_mode = 2
+offset_right = 150.0
+offset_bottom = 113.0
+
+[node name="GoForwardBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "To the next level"
+
+[node name="GoBackBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Go back to town"
 
 [node name="Camera2D" type="Camera2D" parent="main_char"]
 visible = false
