@@ -55,7 +55,7 @@ func compare_speed(a, b):
 		var speed_a = get_speed(a)
 		var speed_b = get_speed(b)
 		
-		if speed_a < speed_b :
+		if speed_a > speed_b :
 			return true
 		return false
 		

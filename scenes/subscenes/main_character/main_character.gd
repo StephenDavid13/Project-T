@@ -28,8 +28,10 @@ var defend : int
 signal on_dead()
 
 func _ready():
-	set_max_health_gamestate()
+	GameState.main_char = self
+	set_gamestate()
 	update_health_bar()
+	print(GameState.player_strength)
 
 func _physics_process(delta):
 	# Gravity things
@@ -97,20 +99,20 @@ func take_damage(damage: int):
 # Player is attacking
 func _on_attack():
 	did_attack = true
-	var damage = ceil((statsheet.STRENGTH * randi_range(0, (statsheet.STRENGTH/2))) + (statsheet.STRENGTH / 2))
+	var damage = ceil((GameState.player_strength * randi_range(0, (GameState.player_strength/2))) + (GameState.player_strength / 2))
 	print("Player attacked with ", damage)
 	$"../TurnManager".get_frontmost_mob().take_damage(damage)
 
 # Player is defending
 func _on_defend():
 	did_defend = true
-	defend = floor((statsheet.STRENGTH + statsheet.VITALITY) * 0.125)
+	defend = floor((GameState.player_strength + GameState.player_vitality) * 0.125)
 	print("Player defended with ", defend)
 
 # Player is healing
 func _on_heal():
 	did_heal = true
-	var heal = floor(statsheet.INTELLIGENCE * randf_range(0.9, 1.5))
+	var heal = floor(GameState.player_intelligence * randf_range(0.9, 1.5))
 	var new_health = GameState.player_current_health + heal
 	if new_health >= GameState.player_max_health:
 		GameState.player_current_health = GameState.player_max_health
@@ -139,11 +141,21 @@ func _on_turn_end():
 	$"../TurnManager".start_next_turn()
 
 func update_health_bar():
-	health_bar.update_health(GameState.player_current_health, max_health)
+	print(GameState.player_max_health)
+	health_bar.update_health(GameState.player_current_health, GameState.player_max_health)
 
-func set_max_health_gamestate():
-	max_health = statsheet.VITALITY
-	GameState.player_max_health = max_health
-	
-	if GameState.player_current_health <= 0:
-		GameState.player_current_health = GameState.player_max_health
+func set_gamestate():
+	if !GameState.is_initialized:
+		GameState.is_initialized = true
+		max_health = statsheet.VITALITY
+		GameState.player_max_health = max_health
+		GameState.player_exp = statsheet.EXPERIENCE
+		
+		# Place stats in GameState
+		GameState.player_strength = statsheet.STRENGTH
+		GameState.player_vitality = statsheet.VITALITY
+		GameState.player_intelligence = statsheet.INTELLIGENCE
+		GameState.player_speed = statsheet.SPEED
+		
+		if GameState.player_current_health <= 0:
+			GameState.player_current_health = GameState.player_max_health

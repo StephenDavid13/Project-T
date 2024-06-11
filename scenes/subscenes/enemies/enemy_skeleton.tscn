@@ -128,7 +128,7 @@ NAME = "Skeleton"
 VITALITY = 10
 STRENGTH = 7
 INTELLIGENCE = 0
-SPEED = 80
+SPEED = 25
 EXPERIENCE = 10
 
 [node name="HealthBar" parent="." instance=ExtResource("4_a8ery")]

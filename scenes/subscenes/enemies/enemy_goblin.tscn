@@ -127,7 +127,7 @@ NAME = "Goblin"
 VITALITY = 15
 STRENGTH = 4
 INTELLIGENCE = 0
-SPEED = 20
+SPEED = 75
 EXPERIENCE = 10
 
 [node name="HealthBar" parent="." instance=ExtResource("5_f1a3e")]
