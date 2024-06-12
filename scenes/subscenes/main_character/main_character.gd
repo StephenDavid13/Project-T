@@ -3,16 +3,15 @@ extends CharacterBody2D
 @onready var main_char = $AnimatedSprite2D
 @onready var statsheet = $StatsComponent
 @onready var health_bar = $HealthBar
-@onready var battle_log = $"../Control/BattleLog"
 
 # Random stuff
+var battle_log
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rng_generator = RandomNumberGenerator.new()
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 
-enum DungeonState { PRE_BATTLE, BATTLING, POST_BATTLE }
-var current_battle_state = DungeonState.PRE_BATTLE
+var current_battle_state = GameState.DungeonState.PRE_BATTLE
 
 # What player gonna do
 var can_move = true
@@ -26,12 +25,16 @@ var did_defend = false
 var max_health : int
 var defend : int
 
+
 signal on_dead()
 
 func _ready():
 	GameState.main_char = self
 	set_gamestate()
 	update_health_bar()
+	
+	if GameState.on_tower:
+		battle_log = $"../Control/BattleLog"
 
 func _physics_process(delta):
 	# Gravity things
@@ -40,14 +43,14 @@ func _physics_process(delta):
 
 	# Character is in battle mode
 	if GameState.on_tower:
-		if current_battle_state == DungeonState.PRE_BATTLE:
+		if current_battle_state == GameState.DungeonState.PRE_BATTLE:
 			velocity.x = move_toward((0.5 * SPEED), 0, 12)
 			move_and_slide()
 		if go_forward:
-			velocity.x = move_toward((0.5 * SPEED), 0, 12)
+			velocity.x = move_toward((0.8 * SPEED), 0, 12)
 			move_and_slide()
 		elif go_back:
-			velocity.x = move_toward((-0.5 * SPEED), 0, 12)
+			velocity.x = move_toward((-0.8 * SPEED), 0, 12)
 			move_and_slide()
 			
 	# Character is attacking
@@ -111,7 +114,7 @@ func _on_attack():
 	var damage = floor((GameState.player_strength + randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
 	if multiplier == 0.0:
 		battle_log.update_message("MISSED! Player attacked with %d" % [damage])
-	if multiplier >= 2.0:
+	if multiplier >= 1.5:
 		battle_log.update_message("CRIT! Player attacked with %d" % [damage])
 	else:
 		battle_log.update_message("Player attacked with %d" % [damage])
@@ -136,11 +139,11 @@ func _on_heal():
 	update_health_bar()
 	
 func _on_next_tower():
-	current_battle_state = DungeonState.PRE_BATTLE
+	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_forward = true
 	
 func _on_back_outside():
-	current_battle_state = DungeonState.PRE_BATTLE
+	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_back = true
 
 # Helper functions

@@ -3,6 +3,7 @@ extends Node
 # Get main_char
 var main_char : Node = null
 var is_initialized : bool = false
+enum DungeonState { PRE_BATTLE, BATTLING, POST_BATTLE }
 
 # Game State variables
 var player_max_health : int

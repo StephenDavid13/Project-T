@@ -102,8 +102,9 @@ func character_died(character):
 		GameState.reset_character()
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
 		battle_log.update_message("You won! Total Experience: %d" % [GameState.player_exp])
-		battle_log.update_message("")
 		startBattle = false
+		await get_tree().create_timer(2).timeout
+		battle_log.update_message("")
 		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
 		battle_log.update_message("You died")

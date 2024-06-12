@@ -23,7 +23,7 @@ func _ready():
 # Called when battle is initiated. Only done once per level. Disallow player
 # movement and change camera view
 func enteringBattle():
-	main_char.current_battle_state = main_char.DungeonState.BATTLING
+	main_char.current_battle_state = GameState.DungeonState.BATTLING
 	main_char.can_move = false;
 	camera_2d.position_smoothing_enabled = true
 	camera_2d.position_smoothing_speed = 2
@@ -37,7 +37,7 @@ func finishingBattle():
 	await get_tree().create_timer(2.5).timeout
 	main_char.can_move = true;
 	camera_2d.position_smoothing_enabled = false
-	main_char.current_battle_state = main_char.DungeonState.POST_BATTLE
+	main_char.current_battle_state = GameState.DungeonState.POST_BATTLE
 	$main_char/ActionPanel.post_battle_selection()
 
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
