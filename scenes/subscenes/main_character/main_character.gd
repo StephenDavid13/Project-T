@@ -3,9 +3,8 @@ extends CharacterBody2D
 @onready var main_char = $AnimatedSprite2D
 @onready var statsheet = $StatsComponent
 @onready var health_bar = $HealthBar
+@onready var battle_log = $"../Control/BattleLog"
 
-# Random stuff
-var battle_log
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rng_generator = RandomNumberGenerator.new()
 const SPEED = 300.0
@@ -13,11 +12,9 @@ const JUMP_VELOCITY = -400.0
 
 var current_battle_state = GameState.DungeonState.PRE_BATTLE
 
-# What player gonna do
 var can_move = true
 var go_forward = false
 var go_back = false
-
 var did_attack = false
 var did_heal = false
 var did_defend = false
@@ -25,68 +22,63 @@ var did_defend = false
 var max_health : int
 var defend : int
 
-
 signal on_dead()
 
 func _ready():
 	GameState.main_char = self
 	set_gamestate()
 	update_health_bar()
-	
-	if GameState.on_tower:
-		battle_log = $"../Control/BattleLog"
 
 func _physics_process(delta):
-	# Gravity things
 	if not is_on_floor():
 		velocity.y += gravity * delta
-
-	# Character is in battle mode
-	if GameState.on_tower:
-		if current_battle_state == GameState.DungeonState.PRE_BATTLE:
-			velocity.x = move_toward((0.5 * SPEED), 0, 12)
-			move_and_slide()
-		if go_forward:
-			velocity.x = move_toward((0.8 * SPEED), 0, 12)
-			move_and_slide()
-		elif go_back:
-			velocity.x = move_toward((-0.8 * SPEED), 0, 12)
-			move_and_slide()
-			
-	# Character is attacking
+	
 	if did_attack:
 		main_char.play("attack")
-	
-	# Character is moving
-	if can_move :
-		if (velocity.x > 1 || velocity.x < -1):
+	else:
+		handle_battle_movement()
+		handle_animation()
+		handle_free_movement()
+		move_and_slide()
+		update_direction()
+
+func handle_battle_movement():
+	if GameState.on_tower:
+		if current_battle_state == GameState.DungeonState.PRE_BATTLE and not go_back:
+			main_char.animation = "running"
+			velocity.x = move_toward(1 * SPEED, 0, 12)
+		elif go_forward:
+			main_char.animation = "running"
+			velocity.x = move_toward(1 * SPEED, 0, 12)
+		elif go_back:
+			main_char.animation = "running"
+			velocity.x = move_toward(-1 * SPEED, 0, 12)
+		else:
+			main_char.animation = "default"
+			velocity.x = 0
+
+func handle_animation():
+	if can_move:
+		if abs(velocity.x) > 1:
 			main_char.animation = "running"
 		else:
 			main_char.animation = "default"
 
-		if !GameState.on_tower:
-			var direction = Input.get_axis("left", "right")
-			if direction:
-				velocity.x = direction * SPEED
-			else:
-				velocity.x = move_toward(velocity.x, 0, 12)
+func handle_free_movement():
+	if not GameState.on_tower and can_move:
+		var direction = Input.get_axis("left", "right")
+		if direction:
+			velocity.x = direction * SPEED
+		else:
+			velocity.x = move_toward(velocity.x, 0, 12)
 
-		move_and_slide()
-		
-		# When going back
-		var isLeft = velocity.x < 0
-		main_char.flip_h = isLeft
-	
-	# Character is idle
-	else:
-		velocity.x = 0
-		main_char.animation = "default"
+func update_direction():
+	main_char.flip_h = velocity.x < 0
 
-# When the mob attacked the character
 func take_damage(damage: int):
 	var final_damage = damage
 	if damage == 0:
-		battle_log.update_message("Monster missed!")
+		log_message("Monster missed!")
 	else:
 		if did_defend:
 			final_damage -= defend
@@ -94,65 +86,59 @@ func take_damage(damage: int):
 			defend = 0
 			if final_damage <= 0:
 				final_damage = 0
-				battle_log.update_message("FULLY DEFENDED! Monster didn't damage you.")
+				log_message("FULLY DEFENDED! Monster didn't damage you.")
 			else:
 				GameState.player_current_health -= final_damage
-				battle_log.update_message("Monster damage with %d" % [final_damage])
+				log_message("Monster dealt %d damage" % final_damage)
 		else:
 			GameState.player_current_health -= final_damage
-			battle_log.update_message("Monster damage with %d" % [final_damage])
+			log_message("Monster dealt %d damage" % final_damage)
+
 		if GameState.player_current_health <= 0:
-			GameState.player_current_health = GameState.player_max_health
+			GameState.player_current_health = 0
+			emit_signal("on_dead")
 			update_health_bar()
-			on_dead.emit()
+
 	update_health_bar()
 
-# Player is attacking
 func _on_attack():
 	did_attack = true
-	var multiplier = randf_range(0, 2)	
-	var damage = floor((GameState.player_strength + randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
+	var multiplier = rng_generator.randf_range(0, 2)
+	var damage = int((GameState.player_strength + rng_generator.randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
 	if multiplier == 0.0:
-		battle_log.update_message("MISSED! Player attacked with %d" % [damage])
-	if multiplier >= 1.5:
-		battle_log.update_message("CRIT! Player attacked with %d" % [damage])
+		log_message("MISSED! Player attacked with %d" % damage)
+	elif multiplier >= 1.5:
+		log_message("CRIT! Player attacked with %d" % damage)
 	else:
-		battle_log.update_message("Player attacked with %d" % [damage])
+		log_message("Player attacked with %d" % damage)
+
 	$"../TurnManager".get_frontmost_mob().take_damage(damage)
 
-# Player is defending
 func _on_defend():
 	did_defend = true
-	defend = floor((GameState.player_strength + GameState.player_vitality) * 0.05)
-	battle_log.update_message("Player defended with %d" % [defend])
+	defend = int((GameState.player_strength + GameState.player_vitality) * 0.05)
+	log_message("Player defended with %d" % defend)
 
-# Player is healing
 func _on_heal():
 	did_heal = true
-	var heal = floor(GameState.player_intelligence * randf_range(0.75, 1.5))
-	var new_health = GameState.player_current_health + heal
-	if new_health >= GameState.player_max_health:
-		GameState.player_current_health = GameState.player_max_health
-	else:
-		GameState.player_current_health += heal
-	battle_log.update_message("Player healed with %d" % [heal])
+	var heal = int(GameState.player_intelligence * rng_generator.randf_range(0.75, 1.5))
+	GameState.player_current_health = min(GameState.player_current_health + heal, GameState.player_max_health)
+	log_message("Player healed with %d" % heal)
 	update_health_bar()
-	
+
 func _on_next_tower():
 	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_forward = true
-	
+
 func _on_back_outside():
 	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_back = true
 
-# Helper functions
 func turn_start():
 	$ActionPanel.is_player_turn = true
 	$ActionPanel.update_button_state()
 
 func _on_turn_end():
-	# Signal TurnManager to switch to enemy turn
 	await get_tree().create_timer(0.55).timeout
 	did_attack = false
 	$"../TurnManager".start_next_turn()
@@ -161,17 +147,21 @@ func update_health_bar():
 	health_bar.update_health(GameState.player_current_health, GameState.player_max_health)
 
 func set_gamestate():
-	if !GameState.is_initialized:
+	if not GameState.is_initialized:
 		GameState.is_initialized = true
 		max_health = statsheet.VITALITY
 		GameState.player_max_health = max_health
 		GameState.player_exp = statsheet.EXPERIENCE
-		
-		# Place stats in GameState
+
 		GameState.player_strength = statsheet.STRENGTH
 		GameState.player_vitality = statsheet.VITALITY
 		GameState.player_intelligence = statsheet.INTELLIGENCE
 		GameState.player_speed = statsheet.SPEED
-		
+
 		if GameState.player_current_health <= 0:
 			GameState.player_current_health = GameState.player_max_health
+
+func log_message(message: String):
+	if battle_log:
+		battle_log.update_message(message)
+

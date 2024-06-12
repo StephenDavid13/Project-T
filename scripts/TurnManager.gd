@@ -97,13 +97,15 @@ func character_died(character):
 	if character != player:
 		mobs.erase(character)
 	if character == player:
-		battle_log.update_message("You died")
 		startBattle = false
+		battle_log.update_message("You died")
+		await get_tree().create_timer(2).timeout
 		GameState.reset_character()
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
-		battle_log.update_message("You won! Total Experience: %d" % [GameState.player_exp])
 		startBattle = false
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1.0).timeout
+		battle_log.update_message("You won! Total Experience: %d" % [GameState.player_exp])
+		await get_tree().create_timer(1.5).timeout
 		battle_log.update_message("")
 		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
