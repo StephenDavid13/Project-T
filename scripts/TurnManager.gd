@@ -1,5 +1,7 @@
 extends Node
 
+@onready var battle_log = $"../Control/BattleLog"
+
 enum TurnState { PLAYER_TURN, ENEMY_TURN }
 
 var current_turn = TurnState.PLAYER_TURN
@@ -19,7 +21,7 @@ func _ready():
 func start_battle():
 	if not startBattle:
 		startBattle = true
-		await get_tree().create_timer(1.5).timeout
+		await get_tree().create_timer(2).timeout
 		mobs.append_array(enemies.get_children())
 		
 		if(player.has_signal("on_dead")):
@@ -76,7 +78,6 @@ func start_next_turn():
 			turn_queue.append_array(alive_characters)
 		
 		if turn_queue.size() == 0:
-			print("Battle over. No more characters.")
 			return
 		
 		var next_character = turn_queue.pop_front()
@@ -96,17 +97,18 @@ func character_died(character):
 	if character != player:
 		mobs.erase(character)
 	if character == player:
-		print("Player has died. Battle over.")
+		battle_log.update_message("You died")
 		startBattle = false
 		GameState.reset_character()
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
-		print("All enemies defeated. Battle won!")
-		print("Total Experience: ", GameState.player_exp)
+		battle_log.update_message("You won! Total Experience: %d" % [GameState.player_exp])
+		battle_log.update_message("")
 		startBattle = false
 		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
-		print("All characters are dead. Battle over.")
+		battle_log.update_message("You died")
 		startBattle = false
+		GameState.reset_character()
 
 func start_player_turn():
 	current_turn = TurnState.PLAYER_TURN
@@ -130,7 +132,6 @@ func _on_mob_died(mob):
 	character_died(mob)
 	
 func _on_player_died():
-	print("Player died: ", player.get_node("StatsComponent").NAME)
 	character_died(player)
 	
 	

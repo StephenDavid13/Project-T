@@ -30,7 +30,8 @@ func reset_to_default_state():
 
 func turn_start():
 	enemy_animation.play("attack")
-	var damage = ceil((statsheet.STRENGTH * randi_range(0, (statsheet.STRENGTH/2))) + (statsheet.STRENGTH / 2))
+	var multiplier = randf_range(0, 2)
+	var damage = floor((statsheet.STRENGTH + randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
 	$"../../TurnManager".char_take_damage(damage)
 	
 func take_damage(damage: int):

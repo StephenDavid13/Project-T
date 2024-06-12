@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://mi2hvyofm0nv"]
+[gd_scene load_steps=15 format=3 uid="uid://mi2hvyofm0nv"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_1we34"]
 [ext_resource type="Script" path="res://scripts/battle_game_manager.gd" id="2_26x1q"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/EnterBattle.gd" id="7_0sewb"]
 [ext_resource type="Script" path="res://scripts/playerSelection.gd" id="9_ey33n"]
 [ext_resource type="Script" path="res://scripts/TurnManager.gd" id="9_uqhtx"]
+[ext_resource type="Script" path="res://scripts/BattleLog.gd" id="11_nqrff"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sac8h"]
 size = Vector2(140, 251)
@@ -1392,6 +1393,22 @@ script = ExtResource("5_qjp1p")
 
 [node name="TurnManager" type="Node" parent="."]
 script = ExtResource("9_uqhtx")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BattleLog" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 531.0
+offset_top = 981.0
+offset_right = 1129.0
+offset_bottom = 1045.0
+theme_override_font_sizes/normal_font_size = 24
+script = ExtResource("11_nqrff")
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="scene_changers/GoOutside" to="scene_changers/GoOutside" method="_on_body_entered"]
 [connection signal="body_entered" from="scene_changers/EnterBattle" to="scene_changers/EnterBattle" method="_on_body_entered"]
