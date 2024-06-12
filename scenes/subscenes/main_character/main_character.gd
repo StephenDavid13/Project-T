@@ -2,9 +2,7 @@ extends CharacterBody2D
 
 @onready var main_char = $AnimatedSprite2D
 @onready var statsheet = $StatsComponent
-@onready var health_bar = $HealthBar
-@onready var battle_log = $"../Control/BattleLog"
-
+@onready var player_hud = $CanvasLayer/PlayerHUD
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var rng_generator = RandomNumberGenerator.new()
 const SPEED = 300.0
@@ -21,13 +19,17 @@ var did_defend = false
 
 var max_health : int
 var defend : int
+var battle_log : Node
 
 signal on_dead()
 
 func _ready():
 	GameState.main_char = self
+	print(statsheet.NAME)
 	set_gamestate()
 	update_health_bar()
+	if GameState.on_tower:
+		battle_log = $"../Control/BattleLog"
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -42,6 +44,60 @@ func _physics_process(delta):
 		move_and_slide()
 		update_direction()
 
+# START OF THINGS CHARACTER CAN DO WHILE BATTLING
+func _on_attack():
+	did_attack = true
+	var multiplier = rng_generator.randf_range(0, 2)
+	var damage = int((GameState.player_strength + rng_generator.randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
+	if damage == 0:
+		log_message("MISSED! %d damage" % damage)
+	elif multiplier >= 1.5:
+		log_message("CRIT! Attacked with %d" % damage)
+	else:
+		log_message("%s attacked with %d" % [statsheet.NAME, damage])
+
+	$"../TurnManager".get_frontmost_mob().take_damage(damage)
+
+func _on_defend():
+	did_defend = true
+	defend = int((GameState.player_strength + GameState.player_vitality) * 0.05)
+	log_message("Player defended with %d" % defend)
+
+func _on_heal():
+	did_heal = true
+	var heal = int(GameState.player_intelligence * rng_generator.randf_range(0.75, 1.5))
+	GameState.player_current_health = min(GameState.player_current_health + heal, GameState.player_max_health)
+	log_message("Player healed with %d" % heal)
+	update_health_bar()
+	
+func take_damage(damage: int):
+	var final_damage = damage
+	if damage == 0:
+		log_message("Monster missed!")
+	else:
+		if did_defend:
+			final_damage -= defend
+			did_defend = false
+			defend = 0
+			if final_damage <= 0:
+				final_damage = 0
+				log_message("FULLY DEFENDED! Monster didn't damage you.")
+			else:
+				GameState.player_current_health -= final_damage
+				log_message("Monster dealt %d damage" % final_damage)
+		else:
+			GameState.player_current_health -= final_damage
+			log_message("Monster dealt %d damage" % final_damage)
+
+		if GameState.player_current_health <= 0:
+			GameState.player_current_health = 0
+			emit_signal("on_dead")
+			update_health_bar()
+
+	update_health_bar()
+# END OF THINGS CHARACTER CAN DO WHILE BATTLING
+	
+# START FUNCTIONS FOR MOVEMENT
 func handle_battle_movement():
 	if GameState.on_tower:
 		if current_battle_state == GameState.DungeonState.PRE_BATTLE and not go_back:
@@ -75,57 +131,6 @@ func handle_free_movement():
 func update_direction():
 	main_char.flip_h = velocity.x < 0
 
-func take_damage(damage: int):
-	var final_damage = damage
-	if damage == 0:
-		log_message("Monster missed!")
-	else:
-		if did_defend:
-			final_damage -= defend
-			did_defend = false
-			defend = 0
-			if final_damage <= 0:
-				final_damage = 0
-				log_message("FULLY DEFENDED! Monster didn't damage you.")
-			else:
-				GameState.player_current_health -= final_damage
-				log_message("Monster dealt %d damage" % final_damage)
-		else:
-			GameState.player_current_health -= final_damage
-			log_message("Monster dealt %d damage" % final_damage)
-
-		if GameState.player_current_health <= 0:
-			GameState.player_current_health = 0
-			emit_signal("on_dead")
-			update_health_bar()
-
-	update_health_bar()
-
-func _on_attack():
-	did_attack = true
-	var multiplier = rng_generator.randf_range(0, 2)
-	var damage = int((GameState.player_strength + rng_generator.randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
-	if multiplier == 0.0:
-		log_message("MISSED! Player attacked with %d" % damage)
-	elif multiplier >= 1.5:
-		log_message("CRIT! Player attacked with %d" % damage)
-	else:
-		log_message("Player attacked with %d" % damage)
-
-	$"../TurnManager".get_frontmost_mob().take_damage(damage)
-
-func _on_defend():
-	did_defend = true
-	defend = int((GameState.player_strength + GameState.player_vitality) * 0.05)
-	log_message("Player defended with %d" % defend)
-
-func _on_heal():
-	did_heal = true
-	var heal = int(GameState.player_intelligence * rng_generator.randf_range(0.75, 1.5))
-	GameState.player_current_health = min(GameState.player_current_health + heal, GameState.player_max_health)
-	log_message("Player healed with %d" % heal)
-	update_health_bar()
-
 func _on_next_tower():
 	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_forward = true
@@ -133,7 +138,9 @@ func _on_next_tower():
 func _on_back_outside():
 	current_battle_state = GameState.DungeonState.PRE_BATTLE
 	go_back = true
+# END FUNCTIONS FOR MOVEMENT
 
+# START OF HELPER FUNCTIONS FOR TURN BASED MOVEMENT
 func turn_start():
 	$ActionPanel.is_player_turn = true
 	$ActionPanel.update_button_state()
@@ -142,9 +149,14 @@ func _on_turn_end():
 	await get_tree().create_timer(0.55).timeout
 	did_attack = false
 	$"../TurnManager".start_next_turn()
+# END OF HELPER FUNCTIONS FOR TURN BASED MOVEMENT
 
+# START OF OTHER HELPER FUNCTIONS
 func update_health_bar():
-	health_bar.update_health(GameState.player_current_health, GameState.player_max_health)
+	player_hud.update_health(GameState.player_current_health, GameState.player_max_health)
+
+func update_exp():
+	player_hud.update_exp("Velices: %s" % GameState.player_exp)
 
 func set_gamestate():
 	if not GameState.is_initialized:
@@ -157,9 +169,11 @@ func set_gamestate():
 		GameState.player_vitality = statsheet.VITALITY
 		GameState.player_intelligence = statsheet.INTELLIGENCE
 		GameState.player_speed = statsheet.SPEED
-
+		
 		if GameState.player_current_health <= 0:
 			GameState.player_current_health = GameState.player_max_health
+	player_hud.player_name.text = statsheet.NAME
+	update_exp()
 
 func log_message(message: String):
 	if battle_log:

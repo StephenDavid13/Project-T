@@ -4,3 +4,4 @@ extends RichTextLabel
 func update_message(message: String):
 	clear()  # Clear previous messages
 	append_text("[color=white]%s[/color]\n" % [message])
+	await get_tree().create_timer(2.0).timeout

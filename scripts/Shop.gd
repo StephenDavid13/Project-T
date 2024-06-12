@@ -1,5 +1,7 @@
 extends Control
 
+@onready var main_char = $"../CharacterBody2D"
+
 var items = [
 	{"name": "Strength", "price": 100},
 	{"name": "Vitality", "price": 100},
@@ -11,12 +13,9 @@ var items = [
 signal item_purchased(item_name, item_price)
 
 func _ready():
-	update_currency_label()
 	populate_shop_items()
+	main_char.hide()
 	$Panel/CloseButton.pressed.connect(self._on_close_button_pressed)
-
-func update_currency_label():
-	$Panel/CurrencyLabel.text = "Velices: " + str(GameState.player_exp)
 
 func populate_shop_items():
 	var items_container = $Panel/ItemsContainer
@@ -30,7 +29,7 @@ func populate_shop_items():
 func _on_item_button_pressed(item):
 	if GameState.player_exp >= item.price:
 		GameState.player_exp -= item.price
-		update_currency_label()
+		main_char.update_exp()
 		match item.name:
 			"Strength":
 				GameState.increase_strength()
@@ -40,9 +39,6 @@ func _on_item_button_pressed(item):
 				GameState.increase_intelligence()
 			"Speed":
 				GameState.increase_speed()
-		print("Purchased: ", item.name)
-	else:
-		print("Not enough gold to buy: ", item.name)
 
 func _on_close_button_pressed():
 	get_tree().change_scene_to_file("res://scenes/main_scenes/outside_tower.tscn")

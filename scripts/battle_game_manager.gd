@@ -33,11 +33,11 @@ func enteringBattle():
 
 # Called when battle is finished. Allow player to move again
 func finishingBattle():
+	main_char.current_battle_state = GameState.DungeonState.POST_BATTLE
 	camera_2d.move_local_x(-545, true)
 	await get_tree().create_timer(2.5).timeout
 	main_char.can_move = true;
 	camera_2d.position_smoothing_enabled = false
-	main_char.current_battle_state = GameState.DungeonState.POST_BATTLE
 	$main_char/ActionPanel.post_battle_selection()
 
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type

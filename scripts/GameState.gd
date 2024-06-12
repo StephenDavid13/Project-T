@@ -6,6 +6,7 @@ var is_initialized : bool = false
 enum DungeonState { PRE_BATTLE, BATTLING, POST_BATTLE }
 
 # Game State variables
+var player_name : String
 var player_max_health : int
 var player_current_health : int
 var player_exp : int
@@ -29,6 +30,7 @@ func reset_character():
 # Earning experience
 func earn_experience(experience : int):
 	player_exp += experience
+	main_char.update_exp()
 	
 # Functions for increasing stats
 func increase_strength():

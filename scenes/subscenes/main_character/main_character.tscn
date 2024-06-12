@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/subscenes/main_character/main_character.gd" id="1_tu3bq"]
 [ext_resource type="Texture2D" uid="uid://c0pxwkqhle35j" path="res://assets/character/char_blue.png" id="2_thmrf"]
 [ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_6xc1c"]
-[ext_resource type="PackedScene" uid="uid://cbigfu4dtndpr" path="res://scenes/subscenes/props/health_bar.tscn" id="4_0v2dn"]
+[ext_resource type="PackedScene" uid="uid://bc0qrprvswrln" path="res://scenes/subscenes/props/player_hud.tscn" id="4_wwwl1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wvutm"]
 atlas = ExtResource("2_thmrf")
@@ -184,9 +184,6 @@ shape = SubResource("RectangleShape2D_5dmqn")
 
 [node name="StatsComponent" parent="." instance=ExtResource("3_6xc1c")]
 
-[node name="HealthBar" parent="." instance=ExtResource("4_0v2dn")]
-offset_left = -68.0
-offset_top = -103.0
-offset_right = 69.0
-offset_bottom = -76.0
-size_flags_vertical = 3
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" parent="CanvasLayer" instance=ExtResource("4_wwwl1")]

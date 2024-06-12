@@ -1,8 +1,8 @@
 extends Control
 
 # Assuming you use a ProgressBar for simplicity
-@export var health_bar: ProgressBar
-@export var health_label: Label
+var health_bar: ProgressBar
+var health_label: Label
 
 func _ready():
 	health_bar = $HealthProgressBar

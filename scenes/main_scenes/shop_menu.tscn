@@ -8,32 +8,28 @@
 [node name="Shop" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 355.0
+offset_bottom = 228.0
 script = ExtResource("1_rg0wg")
 
 [node name="Panel" type="Panel" parent="Shop"]
-offset_right = 362.0
-offset_bottom = 229.0
+layout_mode = 0
+offset_left = 101.0
+offset_top = 207.0
+offset_right = 1811.0
+offset_bottom = 1043.0
 
 [node name="ItemsContainer" type="VBoxContainer" parent="Shop/Panel"]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="CurrencyLabel" type="Label" parent="Shop/Panel"]
-layout_mode = 2
-offset_left = 238.0
-offset_top = 32.0
-offset_right = 360.0
-offset_bottom = 55.0
-text = "Velices: XXXX"
-
 [node name="CloseButton" type="Button" parent="Shop/Panel"]
 layout_mode = 2
-offset_left = 322.0
-offset_right = 362.0
-offset_bottom = 31.0
+offset_left = 1650.0
+offset_top = 10.0
+offset_right = 1690.0
+offset_bottom = 41.0
 text = "X"
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_gh1g7")]
