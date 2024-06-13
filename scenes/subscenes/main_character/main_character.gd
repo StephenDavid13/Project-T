@@ -25,7 +25,6 @@ signal on_dead()
 
 func _ready():
 	GameState.main_char = self
-	print(statsheet.NAME)
 	set_gamestate()
 	update_health_bar()
 	if GameState.on_tower:
@@ -105,7 +104,7 @@ func handle_battle_movement():
 			velocity.x = move_toward(1 * SPEED, 0, 12)
 		elif go_forward:
 			main_char.animation = "running"
-			velocity.x = move_toward(1 * SPEED, 0, 12)
+			velocity.x = move_toward(1 * (SPEED * 8), 0, 12)
 		elif go_back:
 			main_char.animation = "running"
 			velocity.x = move_toward(-1 * SPEED, 0, 12)
@@ -162,6 +161,7 @@ func set_gamestate():
 	if not GameState.is_initialized:
 		GameState.is_initialized = true
 		max_health = statsheet.VITALITY
+		GameState.player_name = statsheet.NAME
 		GameState.player_max_health = max_health
 		GameState.player_exp = statsheet.EXPERIENCE
 
@@ -172,7 +172,8 @@ func set_gamestate():
 		
 		if GameState.player_current_health <= 0:
 			GameState.player_current_health = GameState.player_max_health
-	player_hud.player_name.text = statsheet.NAME
+			
+	player_hud.player_name.text = GameState.player_name
 	update_exp()
 
 func log_message(message: String):

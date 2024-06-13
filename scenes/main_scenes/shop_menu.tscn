@@ -1,9 +1,77 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpcyf82vmiw47"]
+[gd_scene load_steps=12 format=3 uid="uid://bpcyf82vmiw47"]
 
+[ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_0er5r"]
 [ext_resource type="Script" path="res://scripts/Shop.gd" id="1_rg0wg"]
 [ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="2_gh1g7"]
+[ext_resource type="Texture2D" uid="uid://cscal68cgpjpp" path="res://assets/shop/shop_anim.png" id="4_j5lus"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gvky7"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(0, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hopt"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(118, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pfqdx"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(236, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llwx3"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(354, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bro8w"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(472, 0, 118, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xci6w"]
+atlas = ExtResource("4_j5lus")
+region = Rect2(590, 0, 118, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_clq17"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gvky7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hopt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pfqdx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llwx3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bro8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xci6w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [node name="ShopMenu" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 320.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_0er5r")
+metadata/_edit_lock_ = true
 
 [node name="Shop" type="Control" parent="."]
 layout_mode = 3
@@ -14,23 +82,95 @@ script = ExtResource("1_rg0wg")
 
 [node name="Panel" type="Panel" parent="Shop"]
 layout_mode = 0
-offset_left = 101.0
-offset_top = 207.0
-offset_right = 1811.0
-offset_bottom = 1043.0
-
-[node name="ItemsContainer" type="VBoxContainer" parent="Shop/Panel"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1000.0
+offset_top = 12.0
+offset_right = 1896.0
+offset_bottom = 1039.0
 
 [node name="CloseButton" type="Button" parent="Shop/Panel"]
 layout_mode = 2
-offset_left = 1650.0
-offset_top = 10.0
-offset_right = 1690.0
-offset_bottom = 41.0
-text = "X"
+offset_left = 64.0
+offset_top = 870.0
+offset_right = 832.0
+offset_bottom = 972.0
+theme_override_font_sizes/font_size = 64
+text = "EXIT SHOP"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -492.5
+offset_right = 384.0
+offset_bottom = 299.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="ItemsContainerLabel" type="VBoxContainer" parent="Shop/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="ItemsContainer" type="VBoxContainer" parent="Shop/Panel/HBoxContainer"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 2
+
+[node name="CurrentStats" type="Panel" parent="Shop"]
+layout_mode = 0
+offset_left = 624.0
+offset_top = 12.0
+offset_right = 984.0
+offset_bottom = 376.0
+
+[node name="StatsContainer" type="VBoxContainer" parent="Shop/CurrentStats"]
+custom_minimum_size = Vector2(300, 2.08165e-12)
+layout_mode = 2
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 344.0
+offset_bottom = 228.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="LabelTitle" type="Label" parent="Shop/CurrentStats/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Player's stats"
+
+[node name="LabelStrength" type="Label" parent="Shop/CurrentStats/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Strength"
+
+[node name="LabelVitality" type="Label" parent="Shop/CurrentStats/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Vitality"
+
+[node name="LabelIntelligence" type="Label" parent="Shop/CurrentStats/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Intelligence"
+
+[node name="LabelSpeed" type="Label" parent="Shop/CurrentStats/StatsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Speed"
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_gh1g7")]
 visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(496, 600)
+scale = Vector2(7.55932, 7.55932)
+sprite_frames = SubResource("SpriteFrames_clq17")
+autoplay = "default"

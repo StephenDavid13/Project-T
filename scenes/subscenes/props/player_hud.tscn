@@ -13,7 +13,7 @@ layout_mode = 2
 offset_left = 11.0
 offset_top = 12.0
 offset_right = 609.0
-offset_bottom = 188.0
+offset_bottom = 224.0
 
 [node name="Name" type="RichTextLabel" parent="Panel"]
 layout_mode = 2
@@ -56,3 +56,13 @@ offset_bottom = 36.0
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 22
 text = "HEALTH"
+
+[node name="TowerLevel" type="RichTextLabel" parent="Panel"]
+visible = false
+offset_left = 16.0
+offset_top = 158.0
+offset_right = 580.0
+offset_bottom = 202.0
+size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 26
+text = "Tower Level:"

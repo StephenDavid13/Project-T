@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bsgf58slocpgb"]
+[gd_scene load_steps=8 format=3 uid="uid://djpkbgtaefnq6"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_r2wf6"]
 [ext_resource type="Texture2D" uid="uid://bcm35cf1kmbxc" path="res://assets/tilemap/oak_woods_tileset.png" id="3_ldpnh"]

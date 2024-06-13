@@ -10,7 +10,7 @@ var player_name : String
 var player_max_health : int
 var player_current_health : int
 var player_exp : int
-var tower_level : int
+var tower_level : int = 1
 
 var player_strength : int
 var player_vitality : int
@@ -47,3 +47,41 @@ func increase_intelligence():
 	
 func increase_speed():
 	player_speed += 10
+	
+func save_data():
+	var save_game = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	
+	var save_dict = {
+		"filename": get_parent().get_path(),
+		"player_name": player_name,
+		"player_max_health": player_max_health,
+		"player_exp": player_exp,
+		"player_strength": player_strength,
+		"player_vitality": player_vitality,
+		"player_intelligence": player_intelligence,
+		"player_speed": player_speed
+	}
+	var json_string = JSON.stringify(save_dict)
+	
+	save_game.store_line(json_string)
+	save_game.close()
+	
+func load_data():
+	if not FileAccess.file_exists("user://savegame.save"):
+		return 
+	var save_game = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var save_data_str = save_game.get_as_text()
+	var loading_data = JSON.parse_string(save_data_str)
+	save_game.close()
+	
+	player_name = loading_data["player_name"]
+	player_max_health = loading_data["player_max_health"]
+	player_current_health = player_max_health
+	player_exp = loading_data["player_exp"]
+	player_strength = loading_data["player_strength"]
+	player_vitality = loading_data["player_vitality"]
+	player_intelligence = loading_data["player_intelligence"]
+	player_speed = loading_data["player_speed"]
+		
+	main_char.update_health_bar()
+	main_char.update_exp()
