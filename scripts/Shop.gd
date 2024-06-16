@@ -48,7 +48,6 @@ func populate_shop_items():
 		first_button.grab_focus()
 
 func update_stats():
-	print("name: " + GameState.player_name)
 	stats_title.text = "%s's stats" % GameState.player_name
 	stats_strength.text = "Strength: %d" % GameState.player_strength
 	stats_vitality.text = "Vitality: %d" % GameState.player_vitality

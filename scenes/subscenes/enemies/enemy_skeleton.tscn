@@ -137,4 +137,11 @@ offset_top = -141.0
 offset_right = 56.0
 offset_bottom = -101.0
 
+[node name="lvlLabel" type="Label" parent="."]
+offset_left = -67.0
+offset_top = -173.0
+offset_right = 20.0
+offset_bottom = -150.0
+text = "Level:"
+
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

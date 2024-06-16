@@ -135,3 +135,10 @@ offset_left = -68.0
 offset_top = -91.0
 offset_right = 69.0
 offset_bottom = -51.0
+
+[node name="lvlLabel" type="Label" parent="."]
+offset_left = -57.0
+offset_top = -122.0
+offset_right = 30.0
+offset_bottom = -99.0
+text = "Level:"

@@ -55,7 +55,7 @@ func _on_attack():
 	else:
 		log_message("%s attacked with %d" % [statsheet.NAME, damage])
 
-	$"../TurnManager".get_frontmost_mob().take_damage(damage)
+	$"../TurnManager".get_target_mob().take_damage(damage)
 
 func _on_defend():
 	did_defend = true

@@ -4,14 +4,14 @@ extends Control
 @onready var health_label = $Panel/HealthProgressBar/HealthLabel
 @onready var player_name = $Panel/Name
 @onready var player_exp = $Panel/Velices
-@onready var tower_level = $Panel/TowerLevel
+@onready var tower_level = $Panel2/TowerLevel
 
 func _ready():
 	if GameState.on_tower:
 		tower_level.text = "Tower level: %d" % [GameState.tower_level]
-		tower_level.show()
+		$Panel2.show()
 	else:
-		tower_level.hide()
+		$Panel2.hide()
 
 func update_health(current_health: int, max_health: int):
 	health_bar.max_value = max_health

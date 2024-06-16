@@ -13,7 +13,7 @@ layout_mode = 2
 offset_left = 11.0
 offset_top = 12.0
 offset_right = 609.0
-offset_bottom = 224.0
+offset_bottom = 184.0
 
 [node name="Name" type="RichTextLabel" parent="Panel"]
 layout_mode = 2
@@ -57,12 +57,25 @@ size_flags_vertical = 1
 theme_override_font_sizes/font_size = 22
 text = "HEALTH"
 
-[node name="TowerLevel" type="RichTextLabel" parent="Panel"]
+[node name="Panel2" type="Panel" parent="."]
 visible = false
-offset_left = 16.0
-offset_top = 158.0
-offset_right = 580.0
-offset_bottom = 202.0
+layout_mode = 0
+offset_left = 1670.0
+offset_top = 25.0
+offset_right = 1898.0
+offset_bottom = 79.0
+
+[node name="TowerLevel" type="RichTextLabel" parent="Panel2"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -214.0
+offset_top = 5.0
+offset_right = -20.0
+offset_bottom = 49.0
+grow_horizontal = 0
 size_flags_vertical = 3
 theme_override_font_sizes/normal_font_size = 26
 text = "Tower Level:"

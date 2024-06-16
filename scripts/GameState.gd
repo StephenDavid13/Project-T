@@ -11,6 +11,7 @@ var player_max_health : int
 var player_current_health : int
 var player_exp : int
 var tower_level : int = 1
+var highest_tower_level : int = 1
 
 var player_strength : int
 var player_vitality : int

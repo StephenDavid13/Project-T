@@ -42,18 +42,15 @@ func finishingBattle():
 
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
 func spawnMonster():
+	
 	var spawn_number_rng = rng_generator.randi_range(1, 4)
-	if spawn_number_rng >= 1:
-		randomiseMonsterSpawn(mob1, enemy_spawn_1.position)
-		await get_tree().create_timer(0.1).timeout
-	if spawn_number_rng >= 2:
-		randomiseMonsterSpawn(mob2, enemy_spawn_2.position)
-		await get_tree().create_timer(0.1).timeout
-	if spawn_number_rng >= 3:
-		randomiseMonsterSpawn(mob3, enemy_spawn_3.position)
-		await get_tree().create_timer(0.1).timeout
-	if spawn_number_rng >= 4:
-		randomiseMonsterSpawn(mob4, enemy_spawn_4.position)
+	var mobs = [mob1, mob2, mob3, mob4]
+	var spawn_pos = [enemy_spawn_1.position, enemy_spawn_2.position, enemy_spawn_3.position, enemy_spawn_4.position]
+	
+	for i in range(spawn_number_rng):
+		randomiseMonsterSpawn(mobs[i], spawn_pos[i])
+		if i < spawn_number_rng - 1:
+			await get_tree().create_timer(0.1).timeout
 
 # Randomise moonster spawn and instantiate them
 func randomiseMonsterSpawn(mob, spawn_position):

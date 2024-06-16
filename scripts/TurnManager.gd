@@ -47,6 +47,7 @@ func determine_turn_order():
 	
 	# Track alive characters
 	alive_characters = all_characters.duplicate()
+	print(alive_characters)
 	
 	# Clear turn queue and repopulate it with the sorted characters
 	turn_queue.clear()
@@ -138,7 +139,7 @@ func _on_player_died():
 	character_died(player)
 	
 	
-func get_frontmost_mob():
+func get_target_mob():
 	var player_position = player.position
 	var closest_mob = null
 	var min_distance = INF
