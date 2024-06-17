@@ -165,6 +165,11 @@ func set_gamestate():
 		GameState.player_max_health = max_health
 		GameState.player_exp = statsheet.EXPERIENCE
 
+		GameState.raw_player_strength = statsheet.STRENGTH
+		GameState.raw_player_vitality = statsheet.VITALITY
+		GameState.raw_player_intelligence = statsheet.INTELLIGENCE
+		GameState.raw_player_speed = statsheet.SPEED
+		
 		GameState.player_strength = statsheet.STRENGTH
 		GameState.player_vitality = statsheet.VITALITY
 		GameState.player_intelligence = statsheet.INTELLIGENCE

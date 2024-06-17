@@ -132,7 +132,7 @@ func char_take_damage(damage: int):
 	player.take_damage(damage)
 	
 func _on_mob_died(mob):
-	GameState.earn_experience(mob.get_node("StatsComponent").EXPERIENCE)
+	GameState.earn_experience(mob.mob_exp, mob.mob_elem, mob.mob_released_currency)
 	character_died(mob)
 	
 func _on_player_died():

@@ -2,8 +2,9 @@ extends Node2D
 
 @onready var enemy_animation = $RigidBody2D/AnimatedSprite2D
 @onready var statsheet = $StatsComponent
-@onready var health_bar = $HealthBar
-@onready var level_label = $lvlLabel
+@onready var health_bar = $Panel/VBoxContainer/HealthBar
+@onready var level_label = $Panel/VBoxContainer/lvlLabel
+@onready var name_label = $Panel/VBoxContainer/nameLabel
 
 @export var default_animation = "default"
 
@@ -13,7 +14,13 @@ var mob_strength : int
 var mob_vitality : int
 var mob_intelligence : int
 var mob_speed : int
+var mob_exp : int
+
 var mob_lvl : int = 1
+var mob_name : String
+var mob_pos: String
+var mob_elem : String
+var mob_released_currency : int
 
 var rng_generator = RandomNumberGenerator.new()
 
@@ -21,13 +28,19 @@ signal on_dead()
 
 func _ready():
 	# Connect the animation_finished signal
-	checkTowerLevel()
-	generateMobLvl()
+	start_create_mob()
 	max_health = mob_vitality
 	current_health = mob_vitality
-	update_health_bar()
+	update_health_bar()	
+	name_label.text = mob_name
 	enemy_animation.animation_finished.connect(self._on_animation_finished)
 
+func start_create_mob():
+	generateMobLvl()
+	insertName()
+	generateElement()
+
+# All animations
 func _on_animation_finished():
 	# This function is called when the animation finishes
 	if enemy_animation.animation == "attack":
@@ -44,14 +57,6 @@ func turn_start():
 	var damage = floor((mob_strength + randi_range(1, mob_strength / 2)) * multiplier)
 	$"../../TurnManager".char_take_damage(damage)
 	
-func generateMobLvl():
-	print(mob_lvl)
-	level_label.text = "Level: %d" % [mob_lvl]
-	mob_strength = statsheet.STRENGTH * mob_lvl
-	mob_vitality = statsheet.VITALITY * mob_lvl
-	mob_intelligence = statsheet.INTELLIGENCE * mob_lvl
-	mob_speed = statsheet.SPEED * mob_lvl
-	
 func take_damage(damage: int):
 	current_health -= damage
 	update_health_bar()
@@ -59,9 +64,43 @@ func take_damage(damage: int):
 		on_dead.emit()
 		queue_free()
 	
-func update_health_bar():
-	health_bar.update_health(current_health, max_health)
+# Insert Names
+func insertName():
+	mob_name = "%s %s - Lvl: %d" % [statsheet.NAME, mob_pos, mob_lvl]
 	
+func insertPos(additional_name : String):
+	mob_pos = additional_name
+	
+# Create levels
+func generateMobLvl():
+	var lvl_modifier = 1
+	checkTowerLevel()
+	if mob_lvl > 1:
+		lvl_modifier = (mob_lvl * 0.5) + 0.5
+	mob_strength = statsheet.STRENGTH * lvl_modifier
+	mob_vitality = ceil(statsheet.VITALITY * mob_lvl)
+	mob_intelligence = statsheet.INTELLIGENCE * mob_lvl
+	mob_speed = ceil(statsheet.SPEED * mob_lvl)
+	mob_exp = floor(statsheet.EXPERIENCE * mob_lvl)
+	
+	generateCurrency(lvl_modifier)
+
+# Add element
+func generateElement():
+	var element = rng_generator.randi_range(0, 3)
+	match element:
+		0:
+			mob_elem = "Water"
+		1:
+			mob_elem = "Earth"
+		2:
+			mob_elem = "Fire"
+		3:
+			mob_elem = "Wind"
+	level_label.text = "%s" % [mob_elem]
+	
+func generateCurrency(lvl_modifier : int):
+	mob_released_currency = (rng_generator.randi_range(1, 10) * 5) * lvl_modifier
 	
 func checkTowerLevel():
 	if GameState.tower_level > 39:
@@ -76,3 +115,7 @@ func checkTowerLevel():
 		mob_lvl = ceil(rng_generator.randi_range(2, 4))
 	elif GameState.tower_level >= 3:
 		mob_lvl = ceil(rng_generator.randi_range(1, 3))
+		
+# Random function helpers
+func update_health_bar():
+	health_bar.update_health(current_health, max_health)

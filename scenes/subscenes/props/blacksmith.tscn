@@ -1,0 +1,120 @@
+[gd_scene load_steps=13 format=3 uid="uid://clupy7k184uug"]
+
+[ext_resource type="Texture2D" uid="uid://b7fxd6kp68kg2" path="res://assets/shop/blacksmith_anim.png" id="1_oue35"]
+[ext_resource type="Script" path="res://scenes/subscenes/props/blacksmith.gd" id="1_vqiym"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nb2bs"]
+atlas = ExtResource("1_oue35")
+region = Rect2(0, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gcjka"]
+atlas = ExtResource("1_oue35")
+region = Rect2(96, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvm2w"]
+atlas = ExtResource("1_oue35")
+region = Rect2(192, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h2tix"]
+atlas = ExtResource("1_oue35")
+region = Rect2(288, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_52kju"]
+atlas = ExtResource("1_oue35")
+region = Rect2(384, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rvthh"]
+atlas = ExtResource("1_oue35")
+region = Rect2(480, 0, 96, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqyht"]
+atlas = ExtResource("1_oue35")
+region = Rect2(576, 0, 96, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y6yis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nb2bs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gcjka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvm2w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h2tix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_52kju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rvthh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqyht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqyht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqyht")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br28p"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 1000
+corner_radius_top_right = 1000
+corner_radius_bottom_right = 1000
+corner_radius_bottom_left = 1000
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmqmc"]
+size = Vector2(158, 126)
+
+[node name="shop" type="Area2D"]
+script = ExtResource("1_vqiym")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(42.75, -42.75)
+scale = Vector2(2.33854, 2.33854)
+sprite_frames = SubResource("SpriteFrames_y6yis")
+autoplay = "default"
+frame_progress = 0.991024
+
+[node name="PanelSign" type="Panel" parent="AnimatedSprite2D"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -58.0
+offset_top = -51.75
+offset_right = -38.0
+offset_bottom = -31.75
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_br28p")
+
+[node name="Label" type="Label" parent="AnimatedSprite2D/PanelSign"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "F"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32, -36)
+shape = SubResource("RectangleShape2D_dmqmc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

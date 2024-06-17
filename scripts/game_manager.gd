@@ -2,6 +2,7 @@ extends Node
 
 var isInSign = false
 var isInShop = false
+var isInBlacksmith = false
 var target_level
 	
 func _ready():
@@ -21,10 +22,15 @@ func checkIfActionBeTriggered():
 		
 	if Input.is_action_just_pressed("action_use") and isInShop :
 		get_tree().change_scene_to_file("res://scenes/main_scenes/shop_menu.tscn")
-		pass
+		
+	elif Input.is_action_just_pressed("action_use") and isInBlacksmith :
+		get_tree().change_scene_to_file("res://scenes/main_scenes/blacksmith_menu.tscn")
 
 func changeIsInSign(boolInSign):
 	isInSign = boolInSign
 	
 func changeIsInShop(boolInShop):
 	isInShop = boolInShop
+	
+func changeIsInBlacksmith(boolInBlacksmith):
+	isInBlacksmith = boolInBlacksmith

@@ -1,30 +1,30 @@
-[gd_scene load_steps=12 format=3 uid="uid://clupy7k184uug"]
+[gd_scene load_steps=12 format=3 uid="uid://cmgwljrr5mu74"]
 
-[ext_resource type="Texture2D" uid="uid://cscal68cgpjpp" path="res://assets/shop/shop_anim.png" id="1_11tv8"]
-[ext_resource type="Script" path="res://scenes/subscenes/props/shop.gd" id="1_jc548"]
+[ext_resource type="Script" path="res://scenes/subscenes/props/shop.gd" id="1_esqss"]
+[ext_resource type="Texture2D" uid="uid://cscal68cgpjpp" path="res://assets/shop/shop_anim.png" id="2_xpom5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvky7"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(0, 0, 118, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hopt"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(118, 0, 118, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pfqdx"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(236, 0, 118, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llwx3"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(354, 0, 118, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bro8w"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(472, 0, 118, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xci6w"]
-atlas = ExtResource("1_11tv8")
+atlas = ExtResource("2_xpom5")
 region = Rect2(590, 0, 118, 128)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y6yis"]
@@ -64,7 +64,7 @@ corner_radius_bottom_left = 1000
 size = Vector2(232, 204.5)
 
 [node name="shop" type="Area2D"]
-script = ExtResource("1_jc548")
+script = ExtResource("1_esqss")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1

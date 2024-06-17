@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://dg33508dh811t"]
+[gd_scene load_steps=12 format=3 uid="uid://dg33508dh811t"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_gfojm"]
 [ext_resource type="PackedScene" uid="uid://6rrfuyskmfis" path="res://scenes/subscenes/props/sign.tscn" id="2_jxm6g"]
 [ext_resource type="Texture2D" uid="uid://bcm35cf1kmbxc" path="res://assets/tilemap/oak_woods_tileset.png" id="3_h1bdt"]
 [ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="4_ppqtc"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_eqd7m"]
-[ext_resource type="PackedScene" uid="uid://clupy7k184uug" path="res://scenes/subscenes/props/shop.tscn" id="5_yap8q"]
+[ext_resource type="PackedScene" uid="uid://clupy7k184uug" path="res://scenes/subscenes/props/blacksmith.tscn" id="5_yap8q"]
 [ext_resource type="Script" path="res://scripts/GoToDungeon.gd" id="6_l4xlj"]
+[ext_resource type="PackedScene" uid="uid://cmgwljrr5mu74" path="res://scenes/subscenes/props/shop.tscn" id="8_fggbr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0712o"]
 texture = ExtResource("3_h1bdt")
@@ -1273,9 +1274,12 @@ size_flags_vertical = 0
 texture = ExtResource("1_gfojm")
 metadata/_edit_lock_ = true
 
-[node name="shop" parent="." instance=ExtResource("5_yap8q")]
-position = Vector2(1259, 705)
+[node name="blacksmith" parent="." instance=ExtResource("5_yap8q")]
+position = Vector2(827, 932)
 priority = -1
+
+[node name="shop" parent="." instance=ExtResource("8_fggbr")]
+position = Vector2(1373, 710)
 
 [node name="sign" parent="." instance=ExtResource("2_jxm6g")]
 position = Vector2(85, 900)

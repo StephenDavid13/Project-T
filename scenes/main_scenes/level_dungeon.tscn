@@ -1374,16 +1374,16 @@ zoom = Vector2(1.5, 1.5)
 [node name="enemies_spawn" type="Node" parent="."]
 
 [node name="enemy_spawn_1" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(992, 845)
+position = Vector2(977, 845)
 
 [node name="enemy_spawn_2" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1147, 845)
+position = Vector2(1151, 845)
 
 [node name="enemy_spawn_3" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1303, 845)
+position = Vector2(1327, 845)
 
 [node name="enemy_spawn_4" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1458, 845)
+position = Vector2(1499, 845)
 
 [node name="enemies" type="Node" parent="."]
 

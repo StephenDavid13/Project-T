@@ -61,13 +61,13 @@ func _on_item_button_pressed(item):
 		main_char.update_exp()
 		match item.name:
 			"Strength":
-				GameState.increase_strength()
+				GameState.increase_strength_raw(5)
 			"Vitality":
-				GameState.increase_vitality()
+				GameState.increase_vitality_raw(10)
 			"Intelligence":
-				GameState.increase_intelligence()
+				GameState.increase_intelligence_raw(5)
 			"Speed":
-				GameState.increase_speed()
+				GameState.increase_speed_raw(10)
 		update_stats()
 
 func _on_close_button_pressed():

@@ -43,17 +43,17 @@ func finishingBattle():
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
 func spawnMonster():
 	
-	var spawn_number_rng = rng_generator.randi_range(1, 4)
+	var spawn_number_rng = rng_generator.randi_range(4, 4)
 	var mobs = [mob1, mob2, mob3, mob4]
 	var spawn_pos = [enemy_spawn_1.position, enemy_spawn_2.position, enemy_spawn_3.position, enemy_spawn_4.position]
 	
 	for i in range(spawn_number_rng):
-		randomiseMonsterSpawn(mobs[i], spawn_pos[i])
+		randomiseMonsterSpawn(mobs[i], spawn_pos[i], i)
 		if i < spawn_number_rng - 1:
 			await get_tree().create_timer(0.1).timeout
 
 # Randomise moonster spawn and instantiate them
-func randomiseMonsterSpawn(mob, spawn_position):
+func randomiseMonsterSpawn(mob, spawn_position, mob_name):
 	var type_rng = rng_generator.randi_range(0, 1)
 	match type_rng:
 		0:
@@ -62,3 +62,12 @@ func randomiseMonsterSpawn(mob, spawn_position):
 			mob = preload("res://scenes/subscenes/enemies/enemy_goblin.tscn").instantiate()
 	mob.position = spawn_position
 	enemies.call_deferred("add_child", mob)
+	match mob_name:
+		0: 
+			mob.insertPos("A")
+		1:
+			mob.insertPos("B")
+		2:
+			mob.insertPos("C")
+		3:
+			mob.insertPos("D")
