@@ -28,7 +28,7 @@ func _ready():
 	set_gamestate()
 	update_health_bar()
 	if GameState.on_tower:
-		battle_log = $"../Control/BattleLog"
+		battle_log = $"../Control/Panel/BattleLog"
 
 func _physics_process(delta):
 	if not is_on_floor():
@@ -44,18 +44,18 @@ func _physics_process(delta):
 		update_direction()
 
 # START OF THINGS CHARACTER CAN DO WHILE BATTLING
-func _on_attack():
+func _on_attack(mob : String):
 	did_attack = true
 	var multiplier = rng_generator.randf_range(0, 2)
 	var damage = int((GameState.player_strength + rng_generator.randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
 	if damage == 0:
-		log_message("MISSED! %d damage" % damage)
+		log_message("MISSED!")
 	elif multiplier >= 1.5:
 		log_message("CRIT! Attacked with %d" % damage)
 	else:
 		log_message("%s attacked with %d" % [statsheet.NAME, damage])
 
-	$"../TurnManager".get_target_mob().take_damage(damage)
+	$"../TurnManager".get_target_mob(mob).take_damage(damage)
 
 func _on_defend():
 	did_defend = true
@@ -145,7 +145,7 @@ func turn_start():
 	$ActionPanel.update_button_state()
 
 func _on_turn_end():
-	await get_tree().create_timer(0.55).timeout
+	await get_tree().create_timer(0.57).timeout
 	did_attack = false
 	$"../TurnManager".start_next_turn()
 # END OF HELPER FUNCTIONS FOR TURN BASED MOVEMENT

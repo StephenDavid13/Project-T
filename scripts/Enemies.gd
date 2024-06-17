@@ -22,6 +22,8 @@ var mob_pos: String
 var mob_elem : String
 var mob_released_currency : int
 
+var dead = false
+
 var rng_generator = RandomNumberGenerator.new()
 
 signal on_dead()
@@ -44,12 +46,15 @@ func start_create_mob():
 func _on_animation_finished():
 	# This function is called when the animation finishes
 	if enemy_animation.animation == "attack":
-		reset_to_default_state()
+		reset_to_default_state(true)
+	if enemy_animation.animation == "on_hit":
+		reset_to_default_state(false)
 
-func reset_to_default_state():
+func reset_to_default_state(from_attack : bool):
 	enemy_animation.play(default_animation)
 	# Notify the TurnManager that this enemy's turn is finished
-	await $"../../TurnManager".start_next_turn()
+	if from_attack:
+		await $"../../TurnManager".start_next_turn()
 
 func turn_start():
 	enemy_animation.play("attack")
@@ -59,14 +64,20 @@ func turn_start():
 	
 func take_damage(damage: int):
 	current_health -= damage
-	update_health_bar()
-	if current_health <= 0:
-		on_dead.emit()
-		queue_free()
+	if damage > 0:
+		enemy_animation.play("on_hit")
+		if current_health <= 0:
+			enemy_animation.play("death")
+			current_health = 0
+			update_health_bar()
+			dead = true
+			on_dead.emit()
+		update_health_bar()
+	
 	
 # Insert Names
 func insertName():
-	mob_name = "%s %s - Lvl: %d" % [statsheet.NAME, mob_pos, mob_lvl]
+	mob_name = "%s %s" % [statsheet.NAME, mob_pos]
 	
 func insertPos(additional_name : String):
 	mob_pos = additional_name
@@ -97,7 +108,7 @@ func generateElement():
 			mob_elem = "Fire"
 		3:
 			mob_elem = "Wind"
-	level_label.text = "%s" % [mob_elem]
+	level_label.text = "%s - Lvl: %d" % [mob_elem, mob_lvl]
 	
 func generateCurrency(lvl_modifier : int):
 	mob_released_currency = (rng_generator.randi_range(1, 10) * 5) * lvl_modifier

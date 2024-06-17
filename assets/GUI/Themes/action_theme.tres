@@ -1,0 +1,22 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://brda0vewouadc"]
+
+[ext_resource type="Texture2D" uid="uid://dbcublcbdfdsj" path="res://assets/GUI/Keyboard/Hovered/tile016.png" id="1_3n0bg"]
+[ext_resource type="FontFile" uid="uid://c1khec1a3qhlh" path="res://assets/GUI/font.ttf" id="1_kh04e"]
+[ext_resource type="Texture2D" uid="uid://dcxwa3io37ssl" path="res://assets/GUI/Keyboard/Buttons/tile016.png" id="1_nsea5"]
+[ext_resource type="Texture2D" uid="uid://0qc0mqim2ucx" path="res://assets/GUI/Keyboard/Pressed/tile016.png" id="3_w2o6b"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkhsv"]
+texture = ExtResource("1_3n0bg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8snys"]
+texture = ExtResource("1_nsea5")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7gey"]
+texture = ExtResource("3_w2o6b")
+
+[resource]
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("1_kh04e")
+Button/styles/focus = SubResource("StyleBoxTexture_qkhsv")
+Button/styles/normal = SubResource("StyleBoxTexture_8snys")
+Button/styles/pressed = SubResource("StyleBoxTexture_d7gey")

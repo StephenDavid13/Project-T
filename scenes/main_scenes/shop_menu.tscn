@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bpcyf82vmiw47"]
+[gd_scene load_steps=13 format=3 uid="uid://bpcyf82vmiw47"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_0er5r"]
 [ext_resource type="Script" path="res://scripts/Shop.gd" id="1_rg0wg"]
 [ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="2_gh1g7"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="3_s88vt"]
 [ext_resource type="Texture2D" uid="uid://cscal68cgpjpp" path="res://assets/shop/shop_anim.png" id="4_j5lus"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvky7"]
@@ -82,17 +83,18 @@ script = ExtResource("1_rg0wg")
 
 [node name="Panel" type="Panel" parent="Shop"]
 layout_mode = 0
-offset_left = 1000.0
+offset_left = 1040.0
 offset_top = 12.0
 offset_right = 1896.0
 offset_bottom = 1039.0
+theme = ExtResource("3_s88vt")
 
 [node name="CloseButton" type="Button" parent="Shop/Panel"]
 layout_mode = 2
-offset_left = 64.0
-offset_top = 870.0
-offset_right = 832.0
-offset_bottom = 972.0
+offset_left = 112.0
+offset_top = 764.0
+offset_right = 744.0
+offset_bottom = 860.0
 theme_override_font_sizes/font_size = 64
 text = "EXIT SHOP"
 
@@ -103,66 +105,65 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -384.0
-offset_top = -492.5
-offset_right = 384.0
-offset_bottom = 299.5
+offset_left = -220.0
+offset_top = -309.5
+offset_right = 236.0
+offset_bottom = 178.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 30
 alignment = 1
 
 [node name="ItemsContainerLabel" type="VBoxContainer" parent="Shop/Panel/HBoxContainer"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="ItemsContainer" type="VBoxContainer" parent="Shop/Panel/HBoxContainer"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
 [node name="CurrentStats" type="Panel" parent="Shop"]
 layout_mode = 0
-offset_left = 624.0
-offset_top = 12.0
-offset_right = 984.0
-offset_bottom = 376.0
+offset_left = 656.0
+offset_top = 8.0
+offset_right = 1032.0
+offset_bottom = 400.0
+theme = ExtResource("3_s88vt")
 
 [node name="StatsContainer" type="VBoxContainer" parent="Shop/CurrentStats"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 344.0
-offset_bottom = 228.0
+offset_left = 54.0
+offset_top = 61.0
+offset_right = 354.0
+offset_bottom = 345.0
 theme_override_constants/separation = 20
-alignment = 1
 
 [node name="LabelTitle" type="Label" parent="Shop/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 42
 text = "Player's stats"
 
 [node name="LabelStrength" type="Label" parent="Shop/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Strength"
 
 [node name="LabelVitality" type="Label" parent="Shop/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Vitality"
 
 [node name="LabelIntelligence" type="Label" parent="Shop/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Intelligence"
 
 [node name="LabelSpeed" type="Label" parent="Shop/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Speed"
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_gh1g7")]

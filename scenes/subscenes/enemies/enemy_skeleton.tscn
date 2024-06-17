@@ -1,10 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://4oheacd0k85c"]
+[gd_scene load_steps=31 format=3 uid="uid://4oheacd0k85c"]
 
 [ext_resource type="Texture2D" uid="uid://cy8nlikvufggk" path="res://assets/enemies/Skeleton/Attack.png" id="1_6gng3"]
-[ext_resource type="Texture2D" uid="uid://ldrroy55w3fx" path="res://assets/enemies/Skeleton/Walk.png" id="1_8177g"]
 [ext_resource type="Script" path="res://scripts/Enemies.gd" id="1_i6w4i"]
+[ext_resource type="Texture2D" uid="uid://cd6y58l7uwwdo" path="res://assets/enemies/Skeleton/Death.png" id="3_o62f2"]
 [ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_qospy"]
 [ext_resource type="PackedScene" uid="uid://cbigfu4dtndpr" path="res://scenes/subscenes/props/health_bar.tscn" id="4_a8ery"]
+[ext_resource type="Texture2D" uid="uid://bydwtos145v1q" path="res://assets/enemies/Skeleton/Idle.png" id="4_c216j"]
+[ext_resource type="Texture2D" uid="uid://d3bhvuvlsoew2" path="res://assets/enemies/Skeleton/Take Hit.png" id="5_2ajo3"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="5_tv1bl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tsop6"]
 atlas = ExtResource("1_6gng3")
@@ -38,20 +41,52 @@ region = Rect2(900, 0, 150, 150)
 atlas = ExtResource("1_6gng3")
 region = Rect2(1050, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_36lae"]
-atlas = ExtResource("1_8177g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ltyit"]
+atlas = ExtResource("3_o62f2")
 region = Rect2(0, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h3jb5"]
-atlas = ExtResource("1_8177g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_pguvt"]
+atlas = ExtResource("3_o62f2")
 region = Rect2(150, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l47qm"]
-atlas = ExtResource("1_8177g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_t75kv"]
+atlas = ExtResource("3_o62f2")
 region = Rect2(300, 0, 150, 150)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_j876c"]
-atlas = ExtResource("1_8177g")
+[sub_resource type="AtlasTexture" id="AtlasTexture_ofiq3"]
+atlas = ExtResource("3_o62f2")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iatu"]
+atlas = ExtResource("4_c216j")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40n0n"]
+atlas = ExtResource("4_c216j")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5q6n"]
+atlas = ExtResource("4_c216j")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dhr47"]
+atlas = ExtResource("4_c216j")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xbgt"]
+atlas = ExtResource("5_2ajo3")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oqfq"]
+atlas = ExtResource("5_2ajo3")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weiry"]
+atlas = ExtResource("5_2ajo3")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b4fmj"]
+atlas = ExtResource("5_2ajo3")
 region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b0c77"]
@@ -87,19 +122,53 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_36lae")
+"texture": SubResource("AtlasTexture_ltyit")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h3jb5")
+"texture": SubResource("AtlasTexture_pguvt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_l47qm")
+"texture": SubResource("AtlasTexture_t75kv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_j876c")
+"texture": SubResource("AtlasTexture_ofiq3")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4iatu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40n0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5q6n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dhr47")
 }],
 "loop": true,
 "name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xbgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oqfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weiry")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b4fmj")
+}],
+"loop": false,
+"name": &"on_hit",
 "speed": 8.0
 }]
 
@@ -115,7 +184,7 @@ texture_filter = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_b0c77")
-animation = &"attack"
+animation = &"on_hit"
 autoplay = "default"
 flip_h = true
 
@@ -132,34 +201,35 @@ SPEED = 25
 EXPERIENCE = 100
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = -104.0
-offset_top = -211.0
-offset_right = 57.0
-offset_bottom = -109.0
+offset_left = -114.0
+offset_top = -207.0
+offset_right = 72.0
+offset_bottom = -105.0
+theme = ExtResource("5_tv1bl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 157.0
-offset_bottom = 103.0
-theme_override_constants/separation = 10
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 167.0
+offset_bottom = 88.0
 
 [node name="nameLabel" type="Label" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "Name"
 
 [node name="lvlLabel" type="Label" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Level:"
 
 [node name="HealthBar" parent="Panel/VBoxContainer" instance=ExtResource("4_a8ery")]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 8
+size_flags_vertical = 10
 
 [connection signal="child_exiting_tree" from="." to="." method="_on_child_exiting_tree"]

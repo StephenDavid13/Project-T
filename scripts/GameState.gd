@@ -23,7 +23,7 @@ var player_vitality : int
 var player_intelligence : int
 var player_speed : int
 
-var currency_water : int = 1000
+var currency_water : int = 0
 var currency_earth : int = 0
 var currency_fire : int = 0
 var currency_wind : int = 0

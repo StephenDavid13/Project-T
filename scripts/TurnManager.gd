@@ -1,6 +1,6 @@
 extends Node
 
-@onready var battle_log = $"../Control/BattleLog"
+@onready var battle_log = $"../Control/Panel/BattleLog"
 
 enum TurnState { PLAYER_TURN, ENEMY_TURN }
 
@@ -47,7 +47,6 @@ func determine_turn_order():
 	
 	# Track alive characters
 	alive_characters = all_characters.duplicate()
-	print(alive_characters)
 	
 	# Clear turn queue and repopulate it with the sorted characters
 	turn_queue.clear()
@@ -100,14 +99,14 @@ func character_died(character):
 	if character == player:
 		startBattle = false
 		battle_log.update_message("You died")
-		await get_tree().create_timer(2).timeout
+		await get_tree().create_timer(1.0).timeout
 		GameState.reset_character()
 	elif alive_characters.size() == 1 and alive_characters[0] == player:
 		startBattle = false
 		await get_tree().create_timer(1.0).timeout
+		enemies.queue_free()
 		battle_log.update_message("You won! Total Experience: %d" % [GameState.player_exp])
 		await get_tree().create_timer(1.5).timeout
-		battle_log.update_message("")
 		$"..".finishingBattle()
 	elif alive_characters.size() == 0:
 		battle_log.update_message("You died")
@@ -139,15 +138,14 @@ func _on_player_died():
 	character_died(player)
 	
 	
-func get_target_mob():
-	var player_position = player.position
-	var closest_mob = null
-	var min_distance = INF
-
-	for mob in mobs:
-		var distance = abs(mob.position.x - player_position.x)
-		if distance < min_distance:
-			min_distance = distance
-			closest_mob = mob
-
-	return closest_mob
+func get_target_mob(mob_attacked : String):
+	print(enemies.get_children())
+	match mob_attacked:
+		"mobA":
+			return enemies.get_child(0)
+		"mobB":
+			return enemies.get_child(1)
+		"mobC":
+			return enemies.get_child(2)
+		"mobD":
+			return enemies.get_child(3)

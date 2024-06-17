@@ -43,7 +43,7 @@ func finishingBattle():
 # Randomise monster amount and call randomiseMonsterSpawn() to instantiate their type
 func spawnMonster():
 	
-	var spawn_number_rng = rng_generator.randi_range(4, 4)
+	var spawn_number_rng = rng_generator.randi_range(1, 4)
 	var mobs = [mob1, mob2, mob3, mob4]
 	var spawn_pos = [enemy_spawn_1.position, enemy_spawn_2.position, enemy_spawn_3.position, enemy_spawn_4.position]
 	

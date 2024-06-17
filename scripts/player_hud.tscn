@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://bc0qrprvswrln"]
+
+[ext_resource type="Script" path="res://scenes/main_scenes/PlayerHUD.gd" id="1_8k7eb"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="2_06rjd"]
+[ext_resource type="Script" path="res://scenes/subscenes/props/HealthProgressBar.gd" id="2_wg8ho"]
+
+[node name="PlayerHUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_8k7eb")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 649.0
+offset_bottom = 197.0
+theme = ExtResource("2_06rjd")
+theme_type_variation = &"Panel"
+
+[node name="Name" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+offset_left = 86.0
+offset_top = 29.0
+offset_right = 574.0
+offset_bottom = 73.0
+size_flags_vertical = 3
+theme = ExtResource("2_06rjd")
+theme_override_font_sizes/normal_font_size = 48
+text = "TEST"
+
+[node name="Velices" type="RichTextLabel" parent="Panel"]
+layout_mode = 2
+offset_left = 87.0
+offset_top = 73.0
+offset_right = 579.0
+offset_bottom = 102.0
+size_flags_vertical = 3
+theme = ExtResource("2_06rjd")
+theme_override_font_sizes/normal_font_size = 36
+text = "Velices: "
+
+[node name="HealthProgressBar" type="ProgressBar" parent="Panel"]
+layout_mode = 2
+offset_left = 84.0
+offset_top = 110.0
+offset_right = 527.0
+offset_bottom = 154.0
+size_flags_vertical = 3
+max_value = 9999.0
+step = 1.0
+show_percentage = false
+script = ExtResource("2_wg8ho")
+
+[node name="HealthLabel" type="Label" parent="Panel/HealthProgressBar"]
+layout_mode = 2
+offset_left = 10.0
+offset_top = 5.0
+offset_right = 128.0
+offset_bottom = 43.0
+size_flags_vertical = 1
+theme = ExtResource("2_06rjd")
+text = "HEALTH"
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 1558.0
+offset_top = 19.0
+offset_right = 1902.0
+offset_bottom = 83.0
+theme = ExtResource("2_06rjd")
+
+[node name="TowerLevel" type="RichTextLabel" parent="Panel2"]
+layout_direction = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -291.0
+offset_top = 8.0
+offset_right = -48.0
+offset_bottom = 54.0
+grow_horizontal = 0
+size_flags_vertical = 3
+text = "Tower Level:"

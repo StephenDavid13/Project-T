@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://c4hbcucvamyvl"]
+[gd_scene load_steps=14 format=3 uid="uid://c4hbcucvamyvl"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_vopiv"]
 [ext_resource type="Script" path="res://scripts/Blacksmith.gd" id="2_0likq"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="3_fry4b"]
 [ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="3_sgdc7"]
 [ext_resource type="Texture2D" uid="uid://b7fxd6kp68kg2" path="res://assets/shop/blacksmith_anim.png" id="4_nyg58"]
 
@@ -89,59 +90,60 @@ script = ExtResource("2_0likq")
 
 [node name="CurrentOrbs" type="Panel" parent="Blacksmith"]
 layout_mode = 0
-offset_left = 624.0
-offset_top = 384.0
-offset_right = 984.0
-offset_bottom = 724.0
+offset_left = 656.0
+offset_top = 424.0
+offset_right = 1032.0
+offset_bottom = 808.0
+theme = ExtResource("3_fry4b")
 
 [node name="StatsContainer" type="VBoxContainer" parent="Blacksmith/CurrentOrbs"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 344.0
-offset_bottom = 228.0
+offset_left = 58.0
+offset_top = 55.0
+offset_right = 358.0
+offset_bottom = 328.0
 theme_override_constants/separation = 20
-alignment = 1
 
 [node name="LabelTitle" type="Label" parent="Blacksmith/CurrentOrbs/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 42
 text = "Elemental Orbs"
 
 [node name="LabelWater" type="Label" parent="Blacksmith/CurrentOrbs/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Water"
 
 [node name="LabelEarth" type="Label" parent="Blacksmith/CurrentOrbs/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Earth"
 
 [node name="LabelFire" type="Label" parent="Blacksmith/CurrentOrbs/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Fire"
 
 [node name="LabelWind" type="Label" parent="Blacksmith/CurrentOrbs/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Wind"
 
 [node name="WeaponMods" type="Panel" parent="Blacksmith"]
 layout_mode = 0
-offset_left = 13.0
-offset_top = 192.0
-offset_right = 608.0
-offset_bottom = 552.0
+offset_left = 8.0
+offset_top = 208.0
+offset_right = 648.0
+offset_bottom = 568.0
+theme = ExtResource("3_fry4b")
 
 [node name="LabelTitle" type="Label" parent="Blacksmith/WeaponMods"]
 layout_mode = 2
-offset_left = 16.0
-offset_top = 22.0
-offset_right = 475.0
-offset_bottom = 72.0
+offset_left = 80.0
+offset_top = 56.0
+offset_right = 539.0
+offset_bottom = 106.0
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 36
 text = "Weapon mods"
@@ -149,88 +151,85 @@ text = "Weapon mods"
 [node name="ModsContainer" type="VBoxContainer" parent="Blacksmith/WeaponMods"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
-offset_left = 16.0
-offset_top = 80.0
-offset_right = 579.0
-offset_bottom = 344.0
+offset_left = 105.0
+offset_top = 95.0
+offset_right = 601.0
+offset_bottom = 346.0
 theme_override_constants/separation = 20
 
 [node name="LabelMod1" type="Label" parent="Blacksmith/WeaponMods/ModsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "--- Empty Mod ---"
 
 [node name="LabelMod2" type="Label" parent="Blacksmith/WeaponMods/ModsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "--- Empty Mod ---"
 
 [node name="LabelMod3" type="Label" parent="Blacksmith/WeaponMods/ModsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "--- Empty Mod ---"
 
 [node name="LabelMod4" type="Label" parent="Blacksmith/WeaponMods/ModsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
 text = "--- Empty Mod ---"
 
 [node name="CurrentStats" type="Panel" parent="Blacksmith"]
 layout_mode = 0
-offset_left = 624.0
-offset_top = 12.0
-offset_right = 984.0
-offset_bottom = 376.0
+offset_left = 656.0
+offset_top = 8.0
+offset_right = 1032.0
+offset_bottom = 400.0
+theme = ExtResource("3_fry4b")
 
 [node name="StatsContainer" type="VBoxContainer" parent="Blacksmith/CurrentStats"]
 custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
-offset_left = 16.0
-offset_top = 14.0
-offset_right = 344.0
-offset_bottom = 228.0
+offset_left = 54.0
+offset_top = 61.0
+offset_right = 354.0
+offset_bottom = 345.0
 theme_override_constants/separation = 20
-alignment = 1
 
 [node name="LabelTitle" type="Label" parent="Blacksmith/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 42
 text = "Player's stats"
 
 [node name="LabelStrength" type="Label" parent="Blacksmith/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Strength"
 
 [node name="LabelVitality" type="Label" parent="Blacksmith/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Vitality"
 
 [node name="LabelIntelligence" type="Label" parent="Blacksmith/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Intelligence"
 
 [node name="LabelSpeed" type="Label" parent="Blacksmith/CurrentStats/StatsContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 42
 text = "Speed"
 
 [node name="Panel" type="Panel" parent="Blacksmith"]
 layout_mode = 0
-offset_left = 1000.0
+offset_left = 1048.0
 offset_top = 12.0
 offset_right = 1896.0
 offset_bottom = 1039.0
+theme = ExtResource("3_fry4b")
 
 [node name="CloseButton" type="Button" parent="Blacksmith/Panel"]
 layout_mode = 2
-offset_left = 64.0
-offset_top = 908.0
-offset_right = 832.0
-offset_bottom = 1010.0
-theme_override_font_sizes/font_size = 64
+offset_left = 112.0
+offset_top = 828.0
+offset_right = 728.0
+offset_bottom = 930.0
+theme_override_font_sizes/font_size = 48
 text = "EXIT BLACKSMITH"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Blacksmith/Panel"]
@@ -240,34 +239,31 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -384.0
-offset_top = -492.5
-offset_right = 384.0
-offset_bottom = 274.5
+offset_left = -216.0
+offset_top = -331.5
+offset_right = 224.0
+offset_bottom = 139.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 100
 alignment = 1
 
 [node name="ItemsContainerLabel" type="VBoxContainer" parent="Blacksmith/Panel/HBoxContainer"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
 layout_mode = 2
 theme_override_constants/separation = 20
 
 [node name="ItemsContainer" type="VBoxContainer" parent="Blacksmith/Panel/HBoxContainer"]
-custom_minimum_size = Vector2(300, 2.08165e-12)
+custom_minimum_size = Vector2(200, 2.08165e-12)
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 2
 
 [node name="ResetButton" type="Button" parent="Blacksmith/Panel"]
 layout_mode = 2
-offset_left = 64.0
-offset_top = 828.0
-offset_right = 832.0
-offset_bottom = 891.0
+offset_left = 112.0
+offset_top = 660.0
+offset_right = 728.0
+offset_bottom = 764.0
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 22
 text = "Remove all mods - 200V"
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("3_sgdc7")]
@@ -275,23 +271,26 @@ visible = false
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(704, 904)
+position = Vector2(528, 904)
 scale = Vector2(5.84856, 5.84856)
 sprite_frames = SubResource("SpriteFrames_clq17")
 autoplay = "default"
 
 [node name="Chatbox" type="Panel" parent="AnimatedSprite2D"]
 visible = false
-offset_left = -117.636
-offset_top = -57.45
-offset_right = -17.6358
-offset_bottom = 10.55
+offset_left = -89.0
+offset_top = -56.0
+offset_right = -11.0
+offset_bottom = 4.0
+theme = ExtResource("3_fry4b")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="AnimatedSprite2D/Chatbox"]
 layout_mode = 0
-offset_left = 2.0
-offset_top = 2.0
-offset_right = 88.0
-offset_bottom = 42.0
+offset_left = 11.0
+offset_top = 8.0
+offset_right = 66.0
+offset_bottom = 52.0
+theme_override_font_sizes/normal_font_size = 16
 text = "TEST"
 fit_content = true
+scroll_active = false

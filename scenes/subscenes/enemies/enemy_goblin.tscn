@@ -1,10 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://m1k3my7wbfs0"]
+[gd_scene load_steps=31 format=3 uid="uid://m1k3my7wbfs0"]
 
 [ext_resource type="Script" path="res://scripts/Enemies.gd" id="1_0o4qd"]
 [ext_resource type="Texture2D" uid="uid://s7drlxykal3a" path="res://assets/enemies/Goblin/Idle.png" id="1_0vfxc"]
 [ext_resource type="Texture2D" uid="uid://4s0joyypdouc" path="res://assets/enemies/Goblin/Attack.png" id="1_vu58a"]
+[ext_resource type="Texture2D" uid="uid://d04hnhgnm0vhe" path="res://assets/enemies/Goblin/Death.png" id="3_14hpg"]
 [ext_resource type="PackedScene" uid="uid://gd0x4e5atisk" path="res://scripts/stats_component.tscn" id="3_ehitu"]
 [ext_resource type="PackedScene" uid="uid://cbigfu4dtndpr" path="res://scenes/subscenes/props/health_bar.tscn" id="5_f1a3e"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="5_pchp0"]
+[ext_resource type="Texture2D" uid="uid://hxl27seau2nv" path="res://assets/enemies/Goblin/Take Hit.png" id="5_rhcei"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyetp"]
 atlas = ExtResource("1_vu58a")
@@ -38,6 +41,22 @@ region = Rect2(900, 0, 150, 150)
 atlas = ExtResource("1_vu58a")
 region = Rect2(1050, 0, 150, 150)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rt6r"]
+atlas = ExtResource("3_14hpg")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7gwb"]
+atlas = ExtResource("3_14hpg")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lvyrd"]
+atlas = ExtResource("3_14hpg")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qel50"]
+atlas = ExtResource("3_14hpg")
+region = Rect2(450, 0, 150, 150)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_s4qjm"]
 atlas = ExtResource("1_0vfxc")
 region = Rect2(0, 0, 150, 150)
@@ -52,6 +71,22 @@ region = Rect2(300, 0, 150, 150)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jlhxe"]
 atlas = ExtResource("1_0vfxc")
+region = Rect2(450, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0xw0"]
+atlas = ExtResource("5_rhcei")
+region = Rect2(0, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqw8b"]
+atlas = ExtResource("5_rhcei")
+region = Rect2(150, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_huafb"]
+atlas = ExtResource("5_rhcei")
+region = Rect2(300, 0, 150, 150)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7jy4"]
+atlas = ExtResource("5_rhcei")
 region = Rect2(450, 0, 150, 150)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_b0c77"]
@@ -87,6 +122,23 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_3rt6r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7gwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lvyrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qel50")
+}],
+"loop": false,
+"name": &"death",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_s4qjm")
 }, {
 "duration": 1.0,
@@ -100,6 +152,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0xw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqw8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_huafb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7jy4")
+}],
+"loop": false,
+"name": &"on_hit",
 "speed": 8.0
 }]
 
@@ -115,6 +184,7 @@ texture_filter = 1
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="RigidBody2D"]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_b0c77")
+animation = &"on_hit"
 autoplay = "default"
 flip_h = true
 
@@ -131,32 +201,33 @@ SPEED = 75
 EXPERIENCE = 100
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = -73.0
-offset_top = -158.0
-offset_right = 68.0
-offset_bottom = -56.0
+offset_left = -110.0
+offset_top = -150.0
+offset_right = 76.0
+offset_bottom = -48.0
+theme = ExtResource("5_pchp0")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 6.0
-offset_top = 7.0
-offset_right = 140.0
-offset_bottom = 97.0
-theme_override_constants/separation = 10
+offset_left = 26.0
+offset_top = 12.0
+offset_right = 167.0
+offset_bottom = 88.0
 
 [node name="nameLabel" type="Label" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_font_sizes/font_size = 24
 text = "Name"
 
 [node name="lvlLabel" type="Label" parent="Panel/VBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Level:"
 
 [node name="HealthBar" parent="Panel/VBoxContainer" instance=ExtResource("5_f1a3e")]
-custom_minimum_size = Vector2(100, 30)
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 8
+size_flags_vertical = 10

@@ -8,10 +8,10 @@ extends Control
 @onready var stats_speed = $CurrentStats/StatsContainer/LabelSpeed
 
 var items = [
-	{"name": "Strength", "price": 100},
-	{"name": "Vitality", "price": 100},
-	{"name": "Intelligence", "price": 100},
-	{"name": "Speed", "price": 100}
+	{"attr": "Strength", "name": "Strength Potion", "price": 100},
+	{"attr": "Vitality", "name": "Vitality Potion", "price": 100},
+	{"attr": "Intelligence", "name": "Intelligence Potion", "price": 100},
+	{"attr": "Speed", "name": "Speed Potion", "price": 100}
 ]
 
 # Signals
@@ -59,7 +59,7 @@ func _on_item_button_pressed(item):
 	if GameState.player_exp >= item.price:
 		GameState.player_exp -= item.price
 		main_char.update_exp()
-		match item.name:
+		match item.attr:
 			"Strength":
 				GameState.increase_strength_raw(5)
 			"Vitality":

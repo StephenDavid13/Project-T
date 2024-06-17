@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://mi2hvyofm0nv"]
+[gd_scene load_steps=26 format=3 uid="uid://mi2hvyofm0nv"]
 
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_1we34"]
 [ext_resource type="Script" path="res://scripts/battle_game_manager.gd" id="2_26x1q"]
@@ -9,8 +9,14 @@
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_qjp1p"]
 [ext_resource type="Script" path="res://scripts/EnterBattle.gd" id="7_0sewb"]
 [ext_resource type="Script" path="res://scripts/playerSelection.gd" id="9_ey33n"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="9_n7wom"]
 [ext_resource type="Script" path="res://scripts/TurnManager.gd" id="9_uqhtx"]
+[ext_resource type="FontFile" uid="uid://c1khec1a3qhlh" path="res://assets/GUI/font.ttf" id="10_0rnmr"]
+[ext_resource type="Texture2D" uid="uid://dbcublcbdfdsj" path="res://assets/GUI/Keyboard/Hovered/tile016.png" id="11_0r4o2"]
 [ext_resource type="Script" path="res://scripts/BattleLog.gd" id="11_nqrff"]
+[ext_resource type="Texture2D" uid="uid://dcxwa3io37ssl" path="res://assets/GUI/Keyboard/Buttons/tile016.png" id="12_6j5hh"]
+[ext_resource type="Texture2D" uid="uid://0qc0mqim2ucx" path="res://assets/GUI/Keyboard/Pressed/tile016.png" id="13_e6q0b"]
+[ext_resource type="Texture2D" uid="uid://c52cxcp5gup5v" path="res://assets/GUI/GUI_4x.png" id="13_kakfc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sac8h"]
 size = Vector2(140, 251)
@@ -1270,6 +1276,26 @@ texture = ExtResource("2_mio3r")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0712o")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkhsv"]
+texture = ExtResource("11_0r4o2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8snys"]
+texture = ExtResource("12_6j5hh")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7gey"]
+texture = ExtResource("13_e6q0b")
+
+[sub_resource type="Theme" id="Theme_lo7xt"]
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("10_0rnmr")
+Button/styles/focus = SubResource("StyleBoxTexture_qkhsv")
+Button/styles/normal = SubResource("StyleBoxTexture_8snys")
+Button/styles/pressed = SubResource("StyleBoxTexture_d7gey")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j40wp"]
+texture = ExtResource("13_kakfc")
+region_rect = Rect2(396.8, 197, 48.7, 56)
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource("2_26x1q")
 
@@ -1338,52 +1364,102 @@ offset_bottom = 171.0
 [node name="attackBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_n7wom")
 text = "Attack"
 icon_alignment = 1
 
 [node name="defendBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_n7wom")
 text = "Defend"
 
 [node name="healBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_n7wom")
 text = "Heal"
 
 [node name="PostBattling_actions" type="VBoxContainer" parent="main_char/ActionPanel"]
 visible = false
 layout_mode = 2
-offset_right = 150.0
+offset_right = 266.0
 offset_bottom = 113.0
 
 [node name="GoForwardBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_n7wom")
 text = "To the next level"
 
 [node name="GoBackBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
 layout_mode = 2
 size_flags_vertical = 3
+theme = ExtResource("9_n7wom")
 text = "Go back to town"
 
 [node name="Camera2D" type="Camera2D" parent="main_char"]
 offset = Vector2(2.08165e-12, -100)
 zoom = Vector2(1.5, 1.5)
 
-[node name="enemies_spawn" type="Node" parent="."]
+[node name="enemies_spawn" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
 [node name="enemy_spawn_1" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(977, 845)
+position = Vector2(920, 845)
 
 [node name="enemy_spawn_2" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1151, 845)
+position = Vector2(1120, 845)
 
 [node name="enemy_spawn_3" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1327, 845)
+position = Vector2(1320, 845)
 
 [node name="enemy_spawn_4" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1499, 845)
+position = Vector2(1520, 845)
+
+[node name="ChooseOponent" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonA" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 880.0
+offset_top = 980.0
+offset_right = 955.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonB" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 979.0
+offset_right = 1155.0
+offset_bottom = 1054.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonC" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 980.0
+offset_right = 1355.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonD" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1480.0
+offset_top = 980.0
+offset_right = 1555.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
 
 [node name="enemies" type="Node" parent="."]
 
@@ -1396,21 +1472,29 @@ script = ExtResource("9_uqhtx")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 837.0
+offset_top = 1039.0
+offset_right = 1522.0
+offset_bottom = 1114.0
 
-[node name="BattleLog" type="RichTextLabel" parent="Control"]
+[node name="Panel" type="Panel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 700.0
+offset_bottom = 75.0
+theme = ExtResource("9_n7wom")
+theme_override_styles/panel = SubResource("StyleBoxTexture_j40wp")
+metadata/_edit_lock_ = true
+
+[node name="BattleLog" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.025
-anchor_top = 0.65
-anchor_right = 0.025
-anchor_bottom = 0.65
-offset_left = 531.0
-offset_top = 981.0
-offset_right = 1129.0
-offset_bottom = 1045.0
-theme_override_font_sizes/normal_font_size = 24
+anchor_left = 0.00857142
+anchor_top = 0.173333
+anchor_right = 0.725714
+anchor_bottom = 0.786667
+offset_right = 1.0
+text = "TEST"
 script = ExtResource("11_nqrff")
 metadata/_edit_use_anchors_ = true
 
