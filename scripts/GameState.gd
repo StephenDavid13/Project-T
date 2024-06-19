@@ -5,13 +5,16 @@ var main_char : Node = null
 var is_initialized : bool = false
 enum DungeonState { PRE_BATTLE, BATTLING, POST_BATTLE }
 
+var is_paused = false
+var pause_menu = preload("res://scenes/main_scenes/pause_menu.tscn").instantiate()
+
 # Game State variables
 var player_name : String
 var player_max_health : int
 var player_current_health : int
 var player_exp : int
 var tower_level : int = 1
-var highest_tower_level : int = 1
+var highest_tower_level : int
 
 var raw_player_strength : int
 var raw_player_vitality : int
@@ -23,28 +26,31 @@ var player_vitality : int
 var player_intelligence : int
 var player_speed : int
 
-var currency_water : int = 0
-var currency_earth : int = 0
-var currency_fire : int = 0
-var currency_wind : int = 0
+var currency_water : int
+var currency_earth : int
+var currency_fire : int
+var currency_wind : int
 
-var water_imbued : int = 1
-var earth_imbued : int = 1
-var fire_imbued : int = 1
-var wind_imbued : int = 1
+var water_imbued : int
+var earth_imbued : int
+var fire_imbued : int
+var wind_imbued : int
 
-var mod_slots : int = 0
-var all_mods_text : Array = []
-var all_mods_percentage : Array = []
-var all_mods_label : Array = ["--- Empty Mod ---", "--- Empty Mod ---", "--- Empty Mod ---", "--- Empty Mod ---"]
+var mod_slots : int
+var all_mods_text : Array
+var all_mods_percentage : Array
+var all_mods_label : Array
 
 var on_tower = false
 
 # Method to reset player world
 func reset_character():
-	on_tower = false
 	tower_level = 1
 	player_exp = 0
+	currency_water = 0
+	currency_earth = 0
+	currency_fire = 0
+	currency_wind = 0
 	player_current_health = player_max_health
 	get_tree().change_scene_to_file("res://scenes/main_scenes/outside_tower.tscn")
 	
@@ -126,7 +132,7 @@ func increase_intelligence():
 func increase_speed():
 	player_speed = raw_player_speed
 	for i in range(all_mods_text.size()):
-		if all_mods_text[i] == "Intelligence":
+		if all_mods_text[i] == "Speed":
 			player_speed = ceil((all_mods_percentage[i] * player_speed) + player_speed)
 
 func reset_mods():
@@ -192,6 +198,9 @@ func load_data():
 	var loading_data = JSON.parse_string(save_data_str)
 	save_game.close()
 	
+	main_char.can_move = true
+	on_tower = false
+	
 	player_name = loading_data["player_name"]
 	player_max_health = loading_data["player_max_health"]
 	player_current_health = player_max_health
@@ -222,6 +231,20 @@ func load_data():
 	all_mods_text.assign(loading_data["all_mods_text"])
 	all_mods_percentage.assign(loading_data["all_mods_percentage"])
 	all_mods_label.assign(loading_data["all_mods_label"])
+	
+	get_tree().change_scene_to_file("res://scenes/main_scenes/outside_tower.tscn")
 		
 	main_char.update_health_bar()
 	main_char.update_exp()
+	
+func toggle_pause():
+	is_paused = !is_paused
+	get_tree().paused = is_paused
+	
+	if is_paused:
+		pause_menu = preload("res://scenes/main_scenes/pause_menu.tscn").instantiate()
+		call_deferred("add_child", pause_menu)
+		
+	else:
+		call_deferred("remove_child", pause_menu)
+		pause_menu.queue_free()

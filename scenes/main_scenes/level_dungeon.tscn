@@ -1315,6 +1315,13 @@ size_flags_vertical = 0
 texture = ExtResource("1_1we34")
 metadata/_edit_lock_ = true
 
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("9_uqhtx")
+
+[node name="game_manager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("5_qjp1p")
+
 [node name="scene_changers" type="Node" parent="."]
 
 [node name="GoOutside" type="Area2D" parent="scene_changers"]
@@ -1462,12 +1469,6 @@ offset_bottom = 1055.0
 theme = SubResource("Theme_lo7xt")
 
 [node name="enemies" type="Node" parent="."]
-
-[node name="game_manager" type="Node" parent="."]
-script = ExtResource("5_qjp1p")
-
-[node name="TurnManager" type="Node" parent="."]
-script = ExtResource("9_uqhtx")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

@@ -260,9 +260,9 @@ alignment = 2
 [node name="ResetButton" type="Button" parent="Blacksmith/Panel"]
 layout_mode = 2
 offset_left = 112.0
-offset_top = 660.0
+offset_top = 691.0
 offset_right = 728.0
-offset_bottom = 764.0
+offset_bottom = 795.0
 size_flags_vertical = 8
 text = "Remove all mods - 200V"
 

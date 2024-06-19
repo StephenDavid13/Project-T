@@ -195,10 +195,10 @@ shape = SubResource("RectangleShape2D_cnbqv")
 [node name="StatsComponent" parent="." instance=ExtResource("3_ehitu")]
 NAME = "Goblin"
 VITALITY = 15
-STRENGTH = 4
+STRENGTH = 3
 INTELLIGENCE = 0
 SPEED = 75
-EXPERIENCE = 100
+EXPERIENCE = 25
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -110.0

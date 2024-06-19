@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://6rrfuyskmfis"]
+[gd_scene load_steps=7 format=3 uid="uid://6rrfuyskmfis"]
 
 [ext_resource type="Texture2D" uid="uid://dkptde3qb2kht" path="res://assets/sign.png" id="1_325y1"]
 [ext_resource type="Script" path="res://scenes/subscenes/props/sign.gd" id="1_k1421"]
+[ext_resource type="Texture2D" uid="uid://dcxwa3io37ssl" path="res://assets/GUI/Keyboard/Buttons/tile016.png" id="3_5gfbi"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j1wcn"]
+texture = ExtResource("3_5gfbi")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7jb3"]
 bg_color = Color(1, 0, 0, 1)
@@ -19,6 +23,19 @@ script = ExtResource("1_k1421")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(4, 4)
 texture = ExtResource("1_325y1")
+
+[node name="PanelSign" type="Panel" parent="Sprite2D"]
+visible = false
+texture_filter = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.75
+offset_top = -31.5
+offset_right = -5.75
+offset_bottom = -21.5
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_j1wcn")
 
 [node name="PanelSignSave" type="Panel" parent="Sprite2D"]
 visible = false

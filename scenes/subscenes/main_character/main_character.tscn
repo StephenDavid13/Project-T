@@ -302,3 +302,4 @@ shape = SubResource("RectangleShape2D_5dmqn")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerHUD" parent="CanvasLayer" instance=ExtResource("4_wwwl1")]
+process_mode = 3

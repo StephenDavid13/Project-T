@@ -8,6 +8,11 @@ var target_level
 func _ready():
 	pass
 	
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		print("cancel")
+		GameState.toggle_pause()
+	
 func _process(_delta):
 	checkIfActionBeTriggered()
 	

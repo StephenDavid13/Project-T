@@ -195,10 +195,10 @@ shape = SubResource("RectangleShape2D_cnbqv")
 [node name="StatsComponent" parent="." instance=ExtResource("3_qospy")]
 NAME = "Skeleton"
 VITALITY = 10
-STRENGTH = 7
+STRENGTH = 8
 INTELLIGENCE = 0
 SPEED = 25
-EXPERIENCE = 100
+EXPERIENCE = 40
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -114.0

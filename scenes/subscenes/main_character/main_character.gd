@@ -30,7 +30,7 @@ func _ready():
 	if GameState.on_tower:
 		battle_log = $"../Control/Panel/BattleLog"
 
-func _physics_process(delta):
+func _physics_process(delta):		
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -161,9 +161,11 @@ func set_gamestate():
 	if not GameState.is_initialized:
 		GameState.is_initialized = true
 		max_health = statsheet.VITALITY
-		GameState.player_name = statsheet.NAME
 		GameState.player_max_health = max_health
+		GameState.player_current_health = max_health
 		GameState.player_exp = statsheet.EXPERIENCE
+		
+		GameState.highest_tower_level = 1
 
 		GameState.raw_player_strength = statsheet.STRENGTH
 		GameState.raw_player_vitality = statsheet.VITALITY
@@ -174,6 +176,21 @@ func set_gamestate():
 		GameState.player_vitality = statsheet.VITALITY
 		GameState.player_intelligence = statsheet.INTELLIGENCE
 		GameState.player_speed = statsheet.SPEED
+		
+		GameState.currency_water = 0
+		GameState.currency_earth = 0
+		GameState.currency_fire = 0
+		GameState.currency_wind = 0
+		
+		GameState.water_imbued = 1
+		GameState.earth_imbued = 1
+		GameState.fire_imbued = 1
+		GameState.wind_imbued = 1
+		
+		GameState.mod_slots = 0
+		GameState.all_mods_label = ["--- Empty Mod ---", "--- Empty Mod ---", "--- Empty Mod ---", "--- Empty Mod ---"]
+		GameState.all_mods_percentage = []
+		GameState.all_mods_text = []
 		
 		if GameState.player_current_health <= 0:
 			GameState.player_current_health = GameState.player_max_health

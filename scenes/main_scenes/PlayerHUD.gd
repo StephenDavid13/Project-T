@@ -12,6 +12,12 @@ func _ready():
 		$Panel2.show()
 	else:
 		$Panel2.hide()
+		
+func _process(_delta):
+	if GameState.is_paused:
+		$Panel.hide()
+	else:
+		$Panel.show()
 
 func update_health(current_health: int, max_health: int):
 	health_bar.max_value = max_health

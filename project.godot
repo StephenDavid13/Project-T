@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Project T"
-config/version="0.0.7"
-run/main_scene="res://scenes/main_scenes/outside_tower.tscn"
+config/version="0.1.2"
+run/main_scene="res://scenes/main_scenes/starting_menu.tscn"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://icon.svg"
 

@@ -1,7 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://cmgwljrr5mu74"]
+[gd_scene load_steps=13 format=3 uid="uid://cmgwljrr5mu74"]
 
 [ext_resource type="Script" path="res://scenes/subscenes/props/shop.gd" id="1_esqss"]
 [ext_resource type="Texture2D" uid="uid://cscal68cgpjpp" path="res://assets/shop/shop_anim.png" id="2_xpom5"]
+[ext_resource type="Texture2D" uid="uid://dcxwa3io37ssl" path="res://assets/GUI/Keyboard/Buttons/tile016.png" id="3_yasgy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gvky7"]
 atlas = ExtResource("2_xpom5")
@@ -53,12 +54,8 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br28p"]
-bg_color = Color(1, 0, 0, 1)
-corner_radius_top_left = 1000
-corner_radius_top_right = 1000
-corner_radius_bottom_right = 1000
-corner_radius_bottom_left = 1000
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qhycb"]
+texture = ExtResource("3_yasgy")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmqmc"]
 size = Vector2(232, 204.5)
@@ -75,28 +72,16 @@ frame_progress = 0.102857
 
 [node name="PanelSign" type="Panel" parent="AnimatedSprite2D"]
 visible = false
+texture_filter = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -69.0
-offset_top = -48.0
-offset_right = -49.0
-offset_bottom = -28.0
+offset_left = -65.25
+offset_top = -0.25
+offset_right = -53.25
+offset_bottom = 11.75
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_br28p")
-
-[node name="Label" type="Label" parent="AnimatedSprite2D/PanelSign"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "F"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_lock_ = true
+theme_override_styles/panel = SubResource("StyleBoxTexture_qhycb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(4, 153.25)

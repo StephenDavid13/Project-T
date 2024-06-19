@@ -25,10 +25,10 @@ var all_mods : Array
 
 
 var items = [
-	{"name": "Water Upgrade", "price": 100},
-	{"name": "Earth Upgrade", "price": 100},
-	{"name": "Fire Upgrade", "price": 100},
-	{"name": "Wind Upgrade", "price": 100}
+	{"name": "Water Upgrade", "price": 200},
+	{"name": "Earth Upgrade", "price": 200},
+	{"name": "Fire Upgrade", "price": 200},
+	{"name": "Wind Upgrade", "price": 200}
 ]
 
 var rng_generator = RandomNumberGenerator.new()
@@ -180,6 +180,7 @@ func update_mods(element: String, percentage : int):
 			break
 	update_orbs()
 	update_stats()
+	print(GameState.player_speed)
 	GameState.all_mods_label.assign([mod1.text, mod2.text, mod3.text, mod4.text])
 	
 

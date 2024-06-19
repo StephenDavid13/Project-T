@@ -1,0 +1,191 @@
+[gd_scene load_steps=6 format=3 uid="uid://cd7i633d1qo0"]
+
+[ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_ar368"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="2_78bk7"]
+[ext_resource type="Script" path="res://scenes/main_scenes/starting_menu.gd" id="3_2hn55"]
+[ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="4_a47qn"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_5sgrd"]
+font_size = 128
+font_color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="starting_menu" type="Node2D"]
+position = Vector2(960, 540)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -640.0
+offset_bottom = -360.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6, 6)
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("1_ar368")
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(1000, 200)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -500.0
+offset_top = -336.0
+offset_right = 500.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("2_78bk7")
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 2
+offset_left = 109.0
+offset_top = 49.0
+offset_right = 901.0
+offset_bottom = 151.0
+theme = ExtResource("2_78bk7")
+text = "COSMIC TWICELAND"
+label_settings = SubResource("LabelSettings_5sgrd")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_2hn55")
+
+[node name="MainControl" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -778.0
+offset_top = -20.0
+offset_right = 738.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MainControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -401.0
+offset_right = 401.0
+offset_bottom = 342.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="NewGame" type="Button" parent="Control/MainControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "New Game
+"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MainControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="LoadGame" type="Button" parent="Control/MainControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Load Game"
+
+[node name="DeleteGame" type="Button" parent="Control/MainControl/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 124)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Delete Save"
+
+[node name="ExitGame" type="Button" parent="Control/MainControl/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Exit"
+
+[node name="NewGameControl" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -778.0
+offset_top = -20.0
+offset_right = 738.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/NewGameControl"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -268.0
+offset_right = 269.0
+offset_bottom = 483.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/NewGameControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="CharacterName" type="Label" parent="Control/NewGameControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Name:"
+
+[node name="CharName" type="LineEdit" parent="Control/NewGameControl/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+max_length = 12
+
+[node name="EnterGame" type="Button" parent="Control/NewGameControl/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 112)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Enter"
+
+[node name="GoBack" type="Button" parent="Control/NewGameControl/VBoxContainer"]
+custom_minimum_size = Vector2(2.08165e-12, 112)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_78bk7")
+theme_override_font_sizes/font_size = 64
+text = "Go back"
+
+[node name="main_char" parent="." instance=ExtResource("4_a47qn")]
+visible = false
+position = Vector2(504, 905)

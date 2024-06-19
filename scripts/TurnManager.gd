@@ -139,7 +139,6 @@ func _on_player_died():
 	
 	
 func get_target_mob(mob_attacked : String):
-	print(enemies.get_children())
 	match mob_attacked:
 		"mobA":
 			return enemies.get_child(0)
