@@ -1473,31 +1473,31 @@ theme = SubResource("Theme_lo7xt")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 837.0
-offset_top = 1039.0
-offset_right = 1522.0
-offset_bottom = 1114.0
+offset_left = 799.0
+offset_top = 1035.0
+offset_right = 1484.0
+offset_bottom = 1110.0
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false
 layout_mode = 0
-offset_right = 700.0
+offset_right = 871.0
 offset_bottom = 75.0
 theme = ExtResource("9_n7wom")
 theme_override_styles/panel = SubResource("StyleBoxTexture_j40wp")
-metadata/_edit_lock_ = true
 
 [node name="BattleLog" type="RichTextLabel" parent="Control/Panel"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.00857142
+anchor_left = 0.00857143
 anchor_top = 0.173333
-anchor_right = 0.725714
+anchor_right = 0.868571
 anchor_bottom = 0.786667
 offset_right = 1.0
 text = "TEST"
 script = ExtResource("11_nqrff")
 metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
 
 [connection signal="body_entered" from="scene_changers/GoOutside" to="scene_changers/GoOutside" method="_on_body_entered"]
 [connection signal="body_entered" from="scene_changers/EnterBattle" to="scene_changers/EnterBattle" method="_on_body_entered"]

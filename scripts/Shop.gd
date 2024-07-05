@@ -24,6 +24,10 @@ func _ready():
 	
 	update_stats()
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		_on_close_button_pressed()
+
 func populate_shop_items():
 	var items_container_string = $Panel/HBoxContainer/ItemsContainerLabel
 	var items_container_button = $Panel/HBoxContainer/ItemsContainer

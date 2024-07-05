@@ -81,10 +81,11 @@ func start_next_turn():
 			return
 		
 		var next_character = turn_queue.pop_front()
-
+		await get_tree().create_timer(0.70).timeout
 		if next_character == player:
 			start_player_turn()
 		else:
+			
 			start_enemy_turn(next_character)
 
 func character_died(character):
@@ -127,8 +128,8 @@ func start_enemy_turn(enemy):
 		# If the enemy does not exist, immediately start the next turn
 		start_next_turn()
 
-func char_take_damage(damage: int):
-	player.take_damage(damage)
+func char_take_damage(mob_name: String, damage: int):
+	player.take_damage(mob_name, damage)
 	
 func _on_mob_died(mob):
 	GameState.earn_experience(mob.mob_exp, mob.mob_elem, mob.mob_released_currency)

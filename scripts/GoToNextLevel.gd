@@ -9,4 +9,8 @@ func _on_body_entered(body):
 		
 func to_the_tower():
 	GameState.on_tower = true
-	get_tree().change_scene_to_file("res://scenes/main_scenes/level_dungeon.tscn")
+	
+	if GameState.BossLevels.find(GameState.on_tower) != -1:
+		get_tree().change_scene_to_file("res://scenes/main_scenes/level_dungeon.tscn")
+	else:
+		get_tree().change_scene_to_file("res://scenes/main_scenes/level_boss.tscn")

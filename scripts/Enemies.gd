@@ -60,7 +60,7 @@ func turn_start():
 	enemy_animation.play("attack")
 	var multiplier = randf_range(0, 2)
 	var damage = floor((mob_strength + randi_range(1, mob_strength / 2)) * multiplier)
-	$"../../TurnManager".char_take_damage(damage)
+	$"../../TurnManager".char_take_damage(mob_name, damage)
 	
 func take_damage(damage: int):
 	current_health -= damage

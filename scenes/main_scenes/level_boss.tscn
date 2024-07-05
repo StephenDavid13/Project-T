@@ -1,16 +1,28 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg33508dh811t"]
+[gd_scene load_steps=26 format=3 uid="uid://dkg8q60i7qc4f"]
 
-[ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="1_gfojm"]
-[ext_resource type="Texture2D" uid="uid://bcm35cf1kmbxc" path="res://assets/tilemap/oak_woods_tileset.png" id="3_h1bdt"]
-[ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="4_ppqtc"]
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="5_eqd7m"]
-[ext_resource type="PackedScene" uid="uid://clupy7k184uug" path="res://scenes/subscenes/props/blacksmith.tscn" id="5_yap8q"]
-[ext_resource type="Script" path="res://scripts/GoToDungeon.gd" id="6_l4xlj"]
-[ext_resource type="PackedScene" uid="uid://cmgwljrr5mu74" path="res://scenes/subscenes/props/shop.tscn" id="8_fggbr"]
-[ext_resource type="PackedScene" uid="uid://cmixjye7lm3wh" path="res://scenes/main_scenes/pause_menu.tscn" id="9_w2wla"]
+[ext_resource type="Script" path="res://scripts/battle_game_manager.gd" id="1_rau4j"]
+[ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="2_3xbgf"]
+[ext_resource type="Script" path="res://scripts/TurnManager.gd" id="3_drxu7"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_6pyi0"]
+[ext_resource type="Script" path="res://scripts/GoOutside.gd" id="5_xdkbo"]
+[ext_resource type="Script" path="res://scripts/EnterBattle.gd" id="6_aereu"]
+[ext_resource type="Script" path="res://scripts/GoToNextLevel.gd" id="7_mgq4k"]
+[ext_resource type="Texture2D" uid="uid://bcm35cf1kmbxc" path="res://assets/tilemap/oak_woods_tileset.png" id="8_1063b"]
+[ext_resource type="PackedScene" uid="uid://thtolow3x80e" path="res://scenes/subscenes/main_character/main_character.tscn" id="9_b5c66"]
+[ext_resource type="Script" path="res://scripts/playerSelection.gd" id="10_ceu05"]
+[ext_resource type="Theme" uid="uid://ytuwofygfcvs" path="res://assets/GUI/Themes/GUI_theme.tres" id="11_7bum5"]
+[ext_resource type="FontFile" uid="uid://c1khec1a3qhlh" path="res://assets/GUI/font.ttf" id="12_ese8c"]
+[ext_resource type="Texture2D" uid="uid://dbcublcbdfdsj" path="res://assets/GUI/Keyboard/Hovered/tile016.png" id="13_8snvd"]
+[ext_resource type="Texture2D" uid="uid://dcxwa3io37ssl" path="res://assets/GUI/Keyboard/Buttons/tile016.png" id="14_uq843"]
+[ext_resource type="Texture2D" uid="uid://0qc0mqim2ucx" path="res://assets/GUI/Keyboard/Pressed/tile016.png" id="15_7pi5c"]
+[ext_resource type="Texture2D" uid="uid://c52cxcp5gup5v" path="res://assets/GUI/GUI_4x.png" id="16_jkgsc"]
+[ext_resource type="Script" path="res://scripts/BattleLog.gd" id="17_kca5l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sac8h"]
+size = Vector2(140, 251)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0712o"]
-texture = ExtResource("3_h1bdt")
+texture = ExtResource("8_1063b")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -38,24 +50,31 @@ texture = ExtResource("3_h1bdt")
 7:0/0 = 0
 7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:0/0 = 0
 8:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:0/0/physics_layer_0/angular_velocity = 0.0
+8:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:0/0 = 0
 9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:0/0/physics_layer_0/angular_velocity = 0.0
+9:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:0/0 = 0
 10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:0/0/physics_layer_0/angular_velocity = 0.0
+10:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:0/0 = 0
 11:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:0/0/physics_layer_0/angular_velocity = 0.0
+11:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:0/0 = 0
 12:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 12:0/0/physics_layer_0/angular_velocity = 0.0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:0/0 = 0
 13:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:0/0/physics_layer_0/angular_velocity = 0.0
+13:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:0/0 = 0
 15:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 15:0/0/physics_layer_0/angular_velocity = 0.0
@@ -118,24 +137,31 @@ texture = ExtResource("3_h1bdt")
 7:1/0 = 0
 7:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:1/0/physics_layer_0/angular_velocity = 0.0
+7:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 8:1/0 = 0
 8:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:1/0/physics_layer_0/angular_velocity = 0.0
+8:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 9:1/0 = 0
 9:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:1/0/physics_layer_0/angular_velocity = 0.0
+9:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 10:1/0 = 0
 10:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 10:1/0/physics_layer_0/angular_velocity = 0.0
+10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 11:1/0 = 0
 11:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 11:1/0/physics_layer_0/angular_velocity = 0.0
+11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 12:1/0 = 0
 12:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 12:1/0/physics_layer_0/angular_velocity = 0.0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 13:1/0 = 0
 13:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 13:1/0/physics_layer_0/angular_velocity = 0.0
+13:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 15:1/0 = 0
 15:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 15:1/0/physics_layer_0/angular_velocity = 0.0
@@ -1250,17 +1276,28 @@ texture = ExtResource("3_h1bdt")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0712o")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sac8h"]
-size = Vector2(140, 251)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qkhsv"]
+texture = ExtResource("13_8snvd")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8snys"]
+texture = ExtResource("14_uq843")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_d7gey"]
+texture = ExtResource("15_7pi5c")
+
+[sub_resource type="Theme" id="Theme_lo7xt"]
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("12_ese8c")
+Button/styles/focus = SubResource("StyleBoxTexture_qkhsv")
+Button/styles/normal = SubResource("StyleBoxTexture_8snys")
+Button/styles/pressed = SubResource("StyleBoxTexture_d7gey")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_j40wp"]
+texture = ExtResource("16_jkgsc")
+region_rect = Rect2(396.8, 197, 48.7, 56)
 
 [node name="Node2D" type="Node2D"]
-
-[node name="PauseGame" parent="." instance=ExtResource("9_w2wla")]
-visible = false
-
-[node name="game_manager" type="Node" parent="."]
-process_mode = 3
-script = ExtResource("5_eqd7m")
+script = ExtResource("1_rau4j")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -1275,34 +1312,193 @@ grow_vertical = 2
 scale = Vector2(6, 6)
 size_flags_horizontal = 0
 size_flags_vertical = 0
-texture = ExtResource("1_gfojm")
+texture = ExtResource("2_3xbgf")
 metadata/_edit_lock_ = true
 
-[node name="blacksmith" parent="." instance=ExtResource("5_yap8q")]
-position = Vector2(889, 931)
-priority = -1
+[node name="TurnManager" type="Node" parent="."]
+script = ExtResource("3_drxu7")
 
-[node name="shop" parent="." instance=ExtResource("8_fggbr")]
-position = Vector2(1396, 710)
+[node name="game_manager" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("4_6pyi0")
+
+[node name="scene_changers" type="Node" parent="."]
+
+[node name="GoOutside" type="Area2D" parent="scene_changers"]
+position = Vector2(60, 850)
+script = ExtResource("5_xdkbo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene_changers/GoOutside"]
+shape = SubResource("RectangleShape2D_sac8h")
+
+[node name="EnterBattle" type="Area2D" parent="scene_changers"]
+position = Vector2(600, 850)
+script = ExtResource("6_aereu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene_changers/EnterBattle"]
+shape = SubResource("RectangleShape2D_sac8h")
+
+[node name="GoToNextLevel" type="Area2D" parent="scene_changers"]
+position = Vector2(1850, 850)
+script = ExtResource("7_mgq4k")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scene_changers/GoToNextLevel"]
+shape = SubResource("RectangleShape2D_sac8h")
 
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2(4, 4)
 tile_set = SubResource("TileSet_mbo1b")
 format = 2
-layer_0/tile_data = PackedInt32Array(983040, 131072, 0, 983041, 65536, 0, 983042, 131072, 0, 983043, 196608, 0, 983044, 262144, 0, 983045, 65536, 0, 983046, 131072, 0, 983047, 196608, 0, 983048, 262144, 0, 983049, 65536, 0, 983050, 131072, 0, 983051, 196608, 0, 983052, 262144, 0, 983053, 65536, 0, 983054, 131072, 0, 983055, 196608, 0, 983056, 262144, 0, 983057, 65536, 0, 983058, 131072, 0, 983059, 196608, 0, 983060, 262144, 0, 983061, 65536, 0, 983062, 131072, 0, 983063, 196608, 0, 983064, 262144, 0, 983065, 65536, 0, 983066, 131072, 0, 983067, 196608, 0, 983068, 262144, 0, 983069, 65536, 0, 983070, 1245184, 131076, 1048576, 65536, 1, 1114112, 65536, 1, 1179648, 65536, 1, 1048577, 65536, 1, 1114113, 65536, 1, 1179649, 65536, 1, 1048578, 65536, 1, 1114114, 65536, 1, 1179650, 65536, 1, 1048579, 65536, 1, 1114115, 65536, 1, 1179651, 65536, 1, 1048580, 65536, 1, 1114116, 65536, 1, 1179652, 65536, 1, 1048581, 65536, 1, 1114117, 65536, 1, 1179653, 65536, 1, 1048582, 65536, 1, 1114118, 65536, 1, 1179654, 65536, 1, 1048583, 65536, 1, 1114119, 65536, 1, 1179655, 65536, 1, 1048584, 65536, 1, 1114120, 65536, 1, 1179656, 65536, 1, 1048585, 65536, 1, 1114121, 65536, 1, 1179657, 65536, 1, 1048586, 65536, 1, 1114122, 65536, 1, 1179658, 65536, 1, 1048587, 65536, 1, 1114123, 65536, 1, 1179659, 65536, 1, 1048588, 65536, 1, 1114124, 65536, 1, 1179660, 65536, 1, 1048589, 65536, 1, 1114125, 65536, 1, 1179661, 65536, 1, 1048590, 65536, 1, 1114126, 65536, 1, 1179662, 65536, 1, 1048591, 65536, 1, 1114127, 65536, 1, 1179663, 65536, 1, 1048592, 65536, 1, 1114128, 65536, 1, 1179664, 65536, 1, 1048593, 65536, 1, 1114129, 65536, 1, 1179665, 65536, 1, 1048594, 65536, 1, 1114130, 65536, 1, 1179666, 65536, 1, 1048595, 65536, 1, 1114131, 65536, 1, 1179667, 65536, 1, 1048596, 65536, 1, 1114132, 65536, 1, 1179668, 65536, 1, 1048597, 65536, 1, 1114133, 65536, 1, 1179669, 65536, 1, 1048598, 65536, 1, 1114134, 65536, 1, 1179670, 65536, 1, 1048599, 65536, 1, 1114135, 65536, 1, 1179671, 65536, 1, 1048600, 65536, 1, 1114136, 65536, 1, 1179672, 65536, 1, 1048601, 65536, 1, 1114137, 65536, 1, 1179673, 65536, 1, 1048602, 65536, 1, 1114138, 65536, 1, 1179674, 65536, 1, 1048603, 65536, 1, 1114139, 65536, 1, 1179675, 65536, 1, 1048604, 65536, 1, 1114140, 65536, 1, 1179676, 65536, 1, 1048605, 65536, 1, 1114141, 65536, 1, 1179677, 65536, 1, 1048575, 1245184, 131076, 393246, 1245184, 131076, 524287, 1245184, 65540, 589823, 1245184, 65540, 655359, 1245184, 65540, 720895, 1245184, 65540, 786431, 1245184, 65540, 851967, 1245184, 65540, 917503, 1245184, 65540, 983039, 1245184, 65540, 458782, 1245184, 65540, 524318, 1245184, 65540, 589854, 1245184, 65540, 655390, 1245184, 65540, 720926, 1245184, 65540, 786462, 1245184, 65540, 851998, 1245184, 65540, 917534, 1245184, 65540)
+layer_0/tile_data = PackedInt32Array(983040, 524288, 0, 983041, 589824, 0, 983042, 655360, 0, 983043, 720896, 0, 983044, 786432, 0, 983045, 524288, 0, 983046, 589824, 0, 983047, 655360, 0, 983048, 720896, 0, 983049, 786432, 0, 983050, 524288, 0, 983051, 589824, 0, 983052, 655360, 0, 983053, 720896, 0, 983054, 786432, 0, 983055, 524288, 0, 983056, 589824, 0, 983057, 655360, 0, 983058, 720896, 0, 983059, 786432, 0, 983060, 524288, 0, 983061, 589824, 0, 983062, 655360, 0, 983063, 720896, 0, 983064, 786432, 0, 983065, 524288, 0, 983066, 589824, 0, 983067, 655360, 0, 983068, 720896, 0, 983069, 786432, 0, 983070, 1245184, 131076, 1048576, 65536, 1, 1114112, 65536, 1, 1179648, 65536, 1, 1048577, 65536, 1, 1114113, 65536, 1, 1179649, 65536, 1, 1048578, 65536, 1, 1114114, 65536, 1, 1179650, 65536, 1, 1048579, 65536, 1, 1114115, 65536, 1, 1179651, 65536, 1, 1048580, 65536, 1, 1114116, 65536, 1, 1179652, 65536, 1, 1048581, 65536, 1, 1114117, 65536, 1, 1179653, 65536, 1, 1048582, 65536, 1, 1114118, 65536, 1, 1179654, 65536, 1, 1048583, 65536, 1, 1114119, 65536, 1, 1179655, 65536, 1, 1048584, 65536, 1, 1114120, 65536, 1, 1179656, 65536, 1, 1048585, 65536, 1, 1114121, 65536, 1, 1179657, 65536, 1, 1048586, 65536, 1, 1114122, 65536, 1, 1179658, 65536, 1, 1048587, 65536, 1, 1114123, 65536, 1, 1179659, 65536, 1, 1048588, 65536, 1, 1114124, 65536, 1, 1179660, 65536, 1, 1048589, 65536, 1, 1114125, 65536, 1, 1179661, 65536, 1, 1048590, 65536, 1, 1114126, 65536, 1, 1179662, 65536, 1, 1048591, 65536, 1, 1114127, 65536, 1, 1179663, 65536, 1, 1048592, 65536, 1, 1114128, 65536, 1, 1179664, 65536, 1, 1048593, 65536, 1, 1114129, 65536, 1, 1179665, 65536, 1, 1048594, 65536, 1, 1114130, 65536, 1, 1179666, 65536, 1, 1048595, 65536, 1, 1114131, 65536, 1, 1179667, 65536, 1, 1048596, 65536, 1, 1114132, 65536, 1, 1179668, 65536, 1, 1048597, 65536, 1, 1114133, 65536, 1, 1179669, 65536, 1, 1048598, 65536, 1, 1114134, 65536, 1, 1179670, 65536, 1, 1048599, 65536, 1, 1114135, 65536, 1, 1179671, 65536, 1, 1048600, 65536, 1, 1114136, 65536, 1, 1179672, 65536, 1, 1048601, 65536, 1, 1114137, 65536, 1, 1179673, 65536, 1, 1048602, 65536, 1, 1114138, 65536, 1, 1179674, 65536, 1, 1048603, 65536, 1, 1114139, 65536, 1, 1179675, 65536, 1, 1048604, 65536, 1, 1114140, 65536, 1, 1179676, 65536, 1, 1048605, 65536, 1, 1114141, 65536, 1, 1179677, 65536, 1, 1048575, 1245184, 131076, 393246, 1245184, 131076, 524287, 1245184, 65540, 589823, 1245184, 65540, 655359, 1245184, 65540, 720895, 1245184, 65540, 786431, 1245184, 65540, 851967, 1245184, 65540, 917503, 1245184, 65540, 983039, 1245184, 65540, 458782, 1245184, 65540, 524318, 1245184, 65540, 589854, 1245184, 65540, 655390, 1245184, 65540, 720926, 1245184, 65540, 786462, 1245184, 65540, 851998, 1245184, 65540, 917534, 1245184, 65540)
 
-[node name="main_char" parent="." instance=ExtResource("4_ppqtc")]
-position = Vector2(1119, 900)
+[node name="main_char" parent="." instance=ExtResource("9_b5c66")]
+position = Vector2(233, 905)
+
+[node name="ActionPanel" type="Control" parent="main_char"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 88.0
+offset_top = -101.0
+offset_right = 221.0
+offset_bottom = 40.0
+script = ExtResource("10_ceu05")
+
+[node name="Battling_actions" type="VBoxContainer" parent="main_char/ActionPanel"]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 171.0
+
+[node name="attackBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_7bum5")
+text = "Attack"
+icon_alignment = 1
+
+[node name="defendBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_7bum5")
+text = "Defend"
+
+[node name="healBtn" type="Button" parent="main_char/ActionPanel/Battling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_7bum5")
+text = "Heal"
+
+[node name="PostBattling_actions" type="VBoxContainer" parent="main_char/ActionPanel"]
+visible = false
+layout_mode = 2
+offset_right = 266.0
+offset_bottom = 113.0
+
+[node name="GoForwardBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_7bum5")
+text = "To the next level"
+
+[node name="GoBackBtn" type="Button" parent="main_char/ActionPanel/PostBattling_actions"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("11_7bum5")
+text = "Go back to town"
 
 [node name="Camera2D" type="Camera2D" parent="main_char"]
 offset = Vector2(2.08165e-12, -100)
 zoom = Vector2(1.5, 1.5)
 
-[node name="GoToDungeon" type="Area2D" parent="."]
-script = ExtResource("6_l4xlj")
+[node name="enemies_spawn" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="GoToDungeon"]
-position = Vector2(1877, 832.5)
-shape = SubResource("RectangleShape2D_sac8h")
+[node name="enemy_spawn_1" type="Marker2D" parent="enemies_spawn"]
+position = Vector2(920, 845)
 
-[connection signal="body_entered" from="GoToDungeon" to="GoToDungeon" method="_on_body_entered"]
+[node name="enemy_spawn_2" type="Marker2D" parent="enemies_spawn"]
+position = Vector2(1120, 845)
+
+[node name="enemy_spawn_3" type="Marker2D" parent="enemies_spawn"]
+position = Vector2(1320, 845)
+
+[node name="enemy_spawn_4" type="Marker2D" parent="enemies_spawn"]
+position = Vector2(1520, 845)
+
+[node name="ChooseOponent" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ButtonA" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 880.0
+offset_top = 980.0
+offset_right = 955.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonB" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 979.0
+offset_right = 1155.0
+offset_bottom = 1054.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonC" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1280.0
+offset_top = 980.0
+offset_right = 1355.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="ButtonD" type="Button" parent="ChooseOponent"]
+visible = false
+layout_mode = 0
+offset_left = 1480.0
+offset_top = 980.0
+offset_right = 1555.0
+offset_bottom = 1055.0
+theme = SubResource("Theme_lo7xt")
+
+[node name="enemies" type="Node" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 799.0
+offset_top = 1035.0
+offset_right = 1484.0
+offset_bottom = 1110.0
+
+[node name="Panel" type="Panel" parent="Control"]
+visible = false
+layout_mode = 0
+offset_right = 871.0
+offset_bottom = 75.0
+theme = ExtResource("11_7bum5")
+theme_override_styles/panel = SubResource("StyleBoxTexture_j40wp")
+
+[node name="BattleLog" type="RichTextLabel" parent="Control/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.00857143
+anchor_top = 0.173333
+anchor_right = 0.868571
+anchor_bottom = 0.786667
+offset_right = 1.0
+text = "TEST"
+script = ExtResource("17_kca5l")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[connection signal="body_entered" from="scene_changers/GoOutside" to="scene_changers/GoOutside" method="_on_body_entered"]
+[connection signal="body_entered" from="scene_changers/EnterBattle" to="scene_changers/EnterBattle" method="_on_body_entered"]
+[connection signal="body_entered" from="scene_changers/GoToNextLevel" to="scene_changers/GoToNextLevel" method="_on_body_entered"]

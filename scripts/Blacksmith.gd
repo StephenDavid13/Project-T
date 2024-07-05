@@ -50,6 +50,10 @@ func _ready():
 	$Panel/ResetButton.pressed.connect(self._on_reset_mods)
 	
 	update_orbs()
+	
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		_on_close_button_pressed()
 
 func populate_shop_items():
 	var items_container_string = $Panel/HBoxContainer/ItemsContainerLabel

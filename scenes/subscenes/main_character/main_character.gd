@@ -46,33 +46,34 @@ func _physics_process(delta):
 # START OF THINGS CHARACTER CAN DO WHILE BATTLING
 func _on_attack(mob : String):
 	did_attack = true
+	var get_mob = $"../TurnManager".get_target_mob(mob)
 	var multiplier = rng_generator.randf_range(0, 2)
 	var damage = int((GameState.player_strength + rng_generator.randi_range(1, statsheet.STRENGTH / 2)) * multiplier)
 	if damage == 0:
 		log_message("MISSED!")
-	elif multiplier >= 1.5:
+	elif multiplier >= 1.8:
 		log_message("CRIT! Attacked with %d" % damage)
 	else:
-		log_message("%s attacked with %d" % [statsheet.NAME, damage])
+		log_message("%s attacked with %d to %s" % [GameState.player_name, damage, get_mob.mob_name])
 
-	$"../TurnManager".get_target_mob(mob).take_damage(damage)
+	get_mob.take_damage(damage)
 
 func _on_defend():
 	did_defend = true
 	defend = int((GameState.player_strength + GameState.player_vitality) * 0.05)
-	log_message("Player defended with %d" % defend)
+	log_message("%s defended with %d" % [GameState.player_name, defend])
 
 func _on_heal():
 	did_heal = true
 	var heal = int(GameState.player_intelligence * rng_generator.randf_range(0.75, 1.5))
 	GameState.player_current_health = min(GameState.player_current_health + heal, GameState.player_max_health)
-	log_message("Player healed with %d" % heal)
+	log_message("%s healed with %d" % [GameState.player_name, heal])
 	update_health_bar()
 	
-func take_damage(damage: int):
+func take_damage(mob_name: String, damage: int):
 	var final_damage = damage
 	if damage == 0:
-		log_message("Monster missed!")
+		log_message("%s missed!" % mob_name)
 	else:
 		if did_defend:
 			final_damage -= defend
@@ -80,13 +81,13 @@ func take_damage(damage: int):
 			defend = 0
 			if final_damage <= 0:
 				final_damage = 0
-				log_message("FULLY DEFENDED! Monster didn't damage you.")
+				log_message("FULLY DEFENDED! %s didn't damage you." % mob_name)
 			else:
 				GameState.player_current_health -= final_damage
-				log_message("Monster dealt %d damage" % final_damage)
+				log_message("%s dealt %d damage" % [mob_name, final_damage])
 		else:
 			GameState.player_current_health -= final_damage
-			log_message("Monster dealt %d damage" % final_damage)
+			log_message("%s dealt %d damage" % [mob_name, final_damage])
 
 		if GameState.player_current_health <= 0:
 			GameState.player_current_health = 0

@@ -4,6 +4,7 @@ extends Node
 var main_char : Node = null
 var is_initialized : bool = false
 enum DungeonState { PRE_BATTLE, BATTLING, POST_BATTLE }
+var  BossLevels = [4, 7, 10, 14, 17, 20, 24, 28, 30, 34, 37, 40, 44, 47, 40]
 
 var is_paused = false
 var pause_menu = preload("res://scenes/main_scenes/pause_menu.tscn").instantiate()
