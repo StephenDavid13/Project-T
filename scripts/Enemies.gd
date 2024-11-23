@@ -59,7 +59,7 @@ func reset_to_default_state(from_attack : bool):
 func turn_start():
 	enemy_animation.play("attack")
 	var multiplier = randf_range(0, 2)
-	var damage = floor((mob_strength + randi_range(1, mob_strength / 2)) * multiplier)
+	var damage = floor((mob_strength + randf_range(1, mob_strength / 2)) * multiplier)
 	$"../../TurnManager".char_take_damage(mob_name, damage)
 	
 func take_damage(damage: int):

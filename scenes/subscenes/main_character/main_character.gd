@@ -105,7 +105,7 @@ func handle_battle_movement():
 			velocity.x = move_toward(1 * SPEED, 0, 12)
 		elif go_forward:
 			main_char.animation = "running"
-			velocity.x = move_toward(1 * (SPEED * 8), 0, 12)
+			velocity.x = move_toward(1 * (SPEED * 16), 0, 12)
 		elif go_back:
 			main_char.animation = "running"
 			velocity.x = move_toward(-1 * SPEED, 0, 12)

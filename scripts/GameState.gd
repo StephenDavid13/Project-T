@@ -17,6 +17,8 @@ var player_exp : int
 var tower_level : int = 1
 var highest_tower_level : int
 
+var player_poition : Vector2 = Vector2(1120, 900)
+
 var raw_player_strength : int
 var raw_player_vitality : int
 var raw_player_intelligence : int

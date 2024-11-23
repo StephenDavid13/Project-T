@@ -4,9 +4,9 @@ var isInSign = false
 var isInShop = false
 var isInBlacksmith = false
 var target_level
-	
+
 func _ready():
-	pass
+	$"../main_char".position = GameState.player_poition
 	
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -25,9 +25,11 @@ func checkIfActionBeTriggered():
 		GameState.load_data()
 		
 	if Input.is_action_just_pressed("action_use") and isInShop :
+		GameState.player_poition = $"../main_char".position
 		get_tree().change_scene_to_file("res://scenes/main_scenes/shop_menu.tscn")
 		
 	elif Input.is_action_just_pressed("action_use") and isInBlacksmith :
+		GameState.player_poition = $"../main_char".position
 		get_tree().change_scene_to_file("res://scenes/main_scenes/blacksmith_menu.tscn")
 
 func changeIsInSign(boolInSign):
