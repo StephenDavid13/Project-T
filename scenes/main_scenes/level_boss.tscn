@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://dkg8q60i7qc4f"]
 
-[ext_resource type="Script" path="res://scripts/battle_game_manager.gd" id="1_rau4j"]
+[ext_resource type="Script" path="res://scripts/battle_game_manager_boss.gd" id="1_sxgdn"]
 [ext_resource type="Texture2D" uid="uid://ccjhuu5bqk1e0" path="res://assets/background/background_layer_1.png" id="2_3xbgf"]
 [ext_resource type="Script" path="res://scripts/TurnManager.gd" id="3_drxu7"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="4_6pyi0"]
@@ -1297,7 +1297,7 @@ texture = ExtResource("16_jkgsc")
 region_rect = Rect2(396.8, 197, 48.7, 56)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_rau4j")
+script = ExtResource("1_sxgdn")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 texture_filter = 1
@@ -1414,16 +1414,7 @@ layout_mode = 3
 anchors_preset = 0
 
 [node name="enemy_spawn_1" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(920, 845)
-
-[node name="enemy_spawn_2" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1120, 845)
-
-[node name="enemy_spawn_3" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1320, 845)
-
-[node name="enemy_spawn_4" type="Marker2D" parent="enemies_spawn"]
-position = Vector2(1520, 845)
+position = Vector2(1200, 845)
 
 [node name="ChooseOponent" type="Control" parent="."]
 visible = false
