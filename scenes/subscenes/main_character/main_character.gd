@@ -30,7 +30,7 @@ func _ready():
 	if GameState.on_tower:
 		battle_log = $"../Control/Panel/BattleLog"
 
-func _physics_process(delta):		
+func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
